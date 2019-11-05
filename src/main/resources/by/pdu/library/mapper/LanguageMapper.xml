@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="by.pdu.library.mapper.LanguageMapper">
+
+    <resultMap id="languageResultMap" type="by.pdu.library.domain.Language">
+        <id column="language_id" property="id"/>
+        <result column="language_name" property="name"/>
+    </resultMap>
+
+    <select id="getLanguageById" resultMap="languageResultMap">
+        SELECT
+            id as "language_id",
+            name as "language_name"
+        FROM
+            language
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="getLanguage" resultMap="languageResultMap">
+        SELECT
+            id as "language_id",
+            name as "language_name"
+        FROM
+            language
+    </select>
+
+</mapper>

@@ -1,0 +1,9 @@
+.idea
+target
+out
+*.iml
+*.ipr
+*.ivs
+.*
+!.gitignore
+*-local.properties
