@@ -3,7 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="application.properties"> <!--ссылка на файл со свойствами(ссылка на СУБД, логин, пароль и тп.)-->
+    <properties
+            resource="application.properties"> <!--ссылка на файл со свойствами(ссылка на СУБД, логин, пароль и тп.)-->
     </properties>
 
     <environments default="development"><!--в данном блоке настраиваются подключения к БД-->
@@ -12,8 +13,8 @@
             <dataSource type="POOLED">
                 <property name="driver" value="${db.driver}"/>
                 <property name="url" value="${db.url}"/>
-                <property name="username" value="${db.username}"/>
-                <property name="password" value="${db.password}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>

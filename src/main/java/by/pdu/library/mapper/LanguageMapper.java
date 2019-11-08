@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface LanguageMapper {
     Language getLanguageById(Integer id);
+
     List getLanguage();
 }
