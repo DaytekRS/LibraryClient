@@ -21,6 +21,8 @@
 
     <mappers><!--в данном блоке необходимо описать маперы, которые используются в проекте-->
         <mapper class="by.pdu.library.mapper.LanguageMapper"/>
+        <mapper class="by.pdu.library.mapper.ReadingRoomMapper"/>
+        <mapper class="by.pdu.library.mapper.EmployeMapper"/>
     </mappers>
 
 

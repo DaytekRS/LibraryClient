@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="by.pdu.library.mapper.EmployeMapper">
+
+    <resultMap id="employeResultMap" type="by.pdu.library.domain.Employe">
+        <id column="employe_id" property="id"/>
+        <result column="employe_fio" property="FIO"/>
+        <result column="employe_login" property="login"/>
+        <result column="employe_password" property="password"/>
+        <collection property="room" javaType="by.pdu.library.domain.ReadingRoom"
+                    resultMap="by.pdu.library.mapper.ReadingRoomMapper.readingRoomResultMap"/>
+    </resultMap>
+
+    <select id="getEmploye" resultMap="employeResultMap">
+        SELECT
+            e.id AS "employe_id",
+            e.fio AS "employe_fio",
+            e.login AS "employe_login",
+            e.password AS "employe_password",
+            r.id AS "readingRoom_id",
+            r.name AS "readingRoom_name",
+            r.address AS "readingRoom_address"
+        FROM
+            EMPLOYE e
+                LEFT JOIN  READING_ROOM r ON e.reading_room_id=r.id
+    </select>
+
+
+</mapper>

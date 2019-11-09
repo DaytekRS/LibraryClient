@@ -1,7 +1,9 @@
 package by.pdu.library.windows.authorization;
 
 import by.pdu.library.Main;
+import by.pdu.library.mapper.EmployeMapper;
 import by.pdu.library.mapper.LanguageMapper;
+import by.pdu.library.mapper.ReadingRoomMapper;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.windows.Window;
 import by.pdu.library.windows.menu.MenuController;
@@ -28,6 +30,8 @@ public class AuthorizationController extends Window {
     TextField password;
 
     public void loadMappers(SqlSessionFactory sqlSessionFactory) {
+        EmployeMapper empl = sqlSessionFactory.openSession().getMapper(EmployeMapper.class);
+        System.out.println(empl.getEmploye());
         LanguageMapper languageMapper = sqlSessionFactory.openSession().getMapper(LanguageMapper.class);
         ctx.inject(LanguageMapper.class, "languageMapper", languageMapper);
     }
