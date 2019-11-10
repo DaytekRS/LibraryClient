@@ -31,4 +31,28 @@ public class AdminMenuController extends Window {
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
         loader.load("windows/menu/adminMenu/fine/fine.fxml", "Штрафы", ((Stage) employeButton.getScene().getWindow()), 600, 400);
     }
+
+    @FXML
+    private void onDepartment() {
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        loader.load("windows/menu/adminMenu/department/department.fxml", "Кафедры", ((Stage) employeButton.getScene().getWindow()), 600, 400);
+    }
+
+    @FXML
+    private void onFaculty() {
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        loader.load("windows/menu/adminMenu/faculty/faculty.fxml", "Факультеты", ((Stage) employeButton.getScene().getWindow()), 505, 400);
+    }
+
+    @FXML
+    private void onGrade() {
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        loader.load("windows/menu/adminMenu/grade/grade.fxml", "Преподавательские степени", ((Stage) employeButton.getScene().getWindow()), 505, 400);
+    }
+
+    @FXML
+    private void onGroup() {
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        loader.load("windows/menu/adminMenu/group/group.fxml", "Группы", ((Stage) employeButton.getScene().getWindow()), 600, 400);
+    }
 }

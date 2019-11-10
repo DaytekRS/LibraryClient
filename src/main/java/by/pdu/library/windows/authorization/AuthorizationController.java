@@ -1,11 +1,9 @@
 package by.pdu.library.windows.authorization;
 
 import by.pdu.library.Main;
+import by.pdu.library.domain.Department;
 import by.pdu.library.domain.Employe;
-import by.pdu.library.mapper.EmployeMapper;
-import by.pdu.library.mapper.FineMapper;
-import by.pdu.library.mapper.LanguageMapper;
-import by.pdu.library.mapper.ReadingRoomMapper;
+import by.pdu.library.mapper.*;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.Window;
@@ -44,6 +42,18 @@ public class AuthorizationController extends Window {
 
         FineMapper fineMapper = sqlSessionFactory.openSession().getMapper(FineMapper.class);
         ctx.inject(FineMapper.class, "fineMapper", fineMapper);
+
+        FacultyMapper facultyMapper = sqlSessionFactory.openSession().getMapper(FacultyMapper.class);
+        ctx.inject(FacultyMapper.class, "facultyMapper", facultyMapper);
+
+        DepartmentMapper departmentMapper = sqlSessionFactory.openSession().getMapper(DepartmentMapper.class);
+        ctx.inject(DepartmentMapper.class, "departmentMapper", departmentMapper);
+
+        GradeMapper gradeMapper = sqlSessionFactory.openSession().getMapper(GradeMapper.class);
+        ctx.inject(GradeMapper.class, "gradeMapper", gradeMapper);
+
+        GroupMapper groupMapper = sqlSessionFactory.openSession().getMapper(GroupMapper.class);
+        ctx.inject(GroupMapper.class, "groupMapper", groupMapper);
     }
 
     @FXML
@@ -67,14 +77,14 @@ public class AuthorizationController extends Window {
             boolean find=false;
             for (Employe employe : employeMapper.getEmploye()){
                 if (employe.getLogin().equals(login.getText())){
-                    loader.load("windows/menu/menu.fxml","Меню",((Stage) login.getScene().getWindow()),300,275);
+                    loader.load("windows/menu/menu.fxml","Меню",((Stage) login.getScene().getWindow()),360,410);
                     find=true;
                     break;
                 }
             }
 
             if(!find){
-                loader.load("windows/menu/adminMenu/adminMenu.fxml","Меню",((Stage) login.getScene().getWindow()),300,275);
+                loader.load("windows/menu/adminMenu/adminMenu.fxml","Меню",((Stage) login.getScene().getWindow()),360,410);
             }
 
 

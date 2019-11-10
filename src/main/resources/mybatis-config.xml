@@ -24,6 +24,10 @@
         <mapper class="by.pdu.library.mapper.ReadingRoomMapper"/>
         <mapper class="by.pdu.library.mapper.EmployeMapper"/>
         <mapper class="by.pdu.library.mapper.FineMapper"/>
+        <mapper class="by.pdu.library.mapper.DepartmentMapper"/>
+        <mapper class="by.pdu.library.mapper.FacultyMapper"/>
+        <mapper class="by.pdu.library.mapper.GradeMapper"/>
+        <mapper class="by.pdu.library.mapper.GroupMapper"/>
     </mappers>
 
 

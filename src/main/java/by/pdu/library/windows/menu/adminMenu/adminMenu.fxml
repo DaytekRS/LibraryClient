@@ -3,10 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.AdminMenuController">
+<AnchorPane prefHeight="410.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.AdminMenuController">
    <children>
       <Button fx:id="employeButton" layoutX="130.0" layoutY="32.0" mnemonicParsing="false" onAction="#onEmploye" prefHeight="25.0" prefWidth="106.0" text="Сотрудники" />
       <Button layoutX="130.0" layoutY="93.0" mnemonicParsing="false" onAction="#onReadingRoom" text="Читальные залы" />
       <Button layoutX="130.0" layoutY="148.0" mnemonicParsing="false" onAction="#onFine" prefHeight="25.0" prefWidth="106.0" text="Штрафы" />
+      <Button layoutX="130.0" layoutY="200.0" mnemonicParsing="false" onAction="#onDepartment" prefHeight="25.0" prefWidth="106.0" text="Кафедры" />
+      <Button layoutX="131.0" layoutY="250.0" mnemonicParsing="false" onAction="#onFaculty" prefHeight="25.0" prefWidth="106.0" text="Факультеты" />
+      <Button layoutX="131.0" layoutY="303.0" mnemonicParsing="false" onAction="#onGrade" prefHeight="25.0" prefWidth="106.0" text="Степени" />
+      <Button layoutX="131.0" layoutY="350.0" mnemonicParsing="false" onAction="#onGroup" prefHeight="25.0" prefWidth="106.0" text="Группы" />
    </children>
 </AnchorPane>
