@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.readingRoom.ReadingRoomController">
+   <children>
+      <TableView fx:id="readingRoomTable" layoutX="25.0" layoutY="28.0" prefHeight="345.0" prefWidth="550.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="id" />
+          <TableColumn prefWidth="183.0" text="Название" />
+            <TableColumn prefWidth="291.0" text="Адрес" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

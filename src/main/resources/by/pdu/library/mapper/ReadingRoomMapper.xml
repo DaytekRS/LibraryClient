@@ -9,4 +9,13 @@
         <result column="readingRoom_name" property="name"/>
         <result column="readingRoom_address" property="address"/>
     </resultMap>
+
+    <select id="getReadingRoom" resultMap="readingRoomResultMap">
+        SELECT
+            r.id AS "readingRoom_id",
+            r.name AS "readingRoom_name",
+            r.address AS "readingRoom_address"
+        FROM
+            READING_ROOM r
+    </select>
 </mapper>

@@ -1,10 +1,12 @@
 package by.pdu.library.windows.authorization;
 
 import by.pdu.library.Main;
+import by.pdu.library.domain.Employe;
 import by.pdu.library.mapper.EmployeMapper;
 import by.pdu.library.mapper.LanguageMapper;
 import by.pdu.library.mapper.ReadingRoomMapper;
 import by.pdu.library.utils.AlertWindow;
+import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.Window;
 import by.pdu.library.windows.menu.MenuController;
 import javafx.fxml.FXML;
@@ -25,19 +27,23 @@ import java.util.Properties;
 public class AuthorizationController extends Window {
 
     @FXML
-    TextField login;
+    private TextField login;
     @FXML
-    TextField password;
+    private TextField password;
 
-    public void loadMappers(SqlSessionFactory sqlSessionFactory) {
-        EmployeMapper empl = sqlSessionFactory.openSession().getMapper(EmployeMapper.class);
-        System.out.println(empl.getEmploye());
+    private void loadMappers(SqlSessionFactory sqlSessionFactory) {
         LanguageMapper languageMapper = sqlSessionFactory.openSession().getMapper(LanguageMapper.class);
         ctx.inject(LanguageMapper.class, "languageMapper", languageMapper);
+
+        EmployeMapper employeMapper = sqlSessionFactory.openSession().getMapper(EmployeMapper.class);
+        ctx.inject(EmployeMapper.class, "employeMapper", employeMapper);
+
+        ReadingRoomMapper readingRoomMapper = sqlSessionFactory.openSession().getMapper(ReadingRoomMapper.class);
+        ctx.inject(ReadingRoomMapper.class, "readingRoomMapper", readingRoomMapper);
     }
 
     @FXML
-    public void click() {
+    private void click() {
         SqlSessionFactory sqlSessionFactory;
         try {
             Properties properties = new Properties();
@@ -50,12 +56,23 @@ public class AuthorizationController extends Window {
 
             ctx.inject(SqlSessionFactory.class, "sqlSessionFactory", sqlSessionFactory);
             loadMappers(sqlSessionFactory);
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("windows/menu/menu.fxml"));
-            Parent root = loader.load();
-            MenuController controller = loader.getController();
-            controller.setApplicationContext(ctx);
-            ((Stage) login.getScene().getWindow()).setTitle("Меню");
-            ((Stage) login.getScene().getWindow()).setScene(new Scene(root, 300, 275));
+
+            EmployeMapper employeMapper = ctx.getBean("employeMapper",EmployeMapper.class);
+
+            LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+            boolean find=false;
+            for (Employe employe : employeMapper.getEmploye()){
+                if (employe.getLogin().equals(login.getText())){
+                    loader.load("windows/menu/menu.fxml","Меню",((Stage) login.getScene().getWindow()),300,275);
+                    find=true;
+                    break;
+                }
+            }
+
+            if(!find){
+                loader.load("windows/menu/adminMenu/adminMenu.fxml","Меню",((Stage) login.getScene().getWindow()),300,275);
+            }
+
 
         } catch (IOException e) {
             AlertWindow.ErrorAlert("Не найден конфигурационный файл");

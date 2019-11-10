@@ -1,6 +1,7 @@
 package by.pdu.library;
 
 import by.pdu.library.utils.support.ApplicationContextImpl;
+import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.authorization.AuthorizationController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +18,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         ctx = new ApplicationContextImpl();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("windows/authorization/authorization.fxml"));
-        Parent root = loader.load();
-        AuthorizationController controller = loader.getController();
-        controller.setApplicationContext(ctx);
-        primaryStage.setTitle("Авторизация");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        LoadFXML loader = new LoadFXML(ctx);
+        ctx.inject(LoadFXML.class,"loader",loader);
+        loader.load("windows/authorization/authorization.fxml","Авторизация",primaryStage,300,275);
         primaryStage.getIcons().add(new Image("img/icon.png"));
         primaryStage.show();
 

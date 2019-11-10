@@ -26,6 +26,8 @@
         FROM
             EMPLOYE e
                 LEFT JOIN  READING_ROOM r ON e.reading_room_id=r.id
+        WHERE
+            e.REMOVED_DATE IS NULL
     </select>
 
 
