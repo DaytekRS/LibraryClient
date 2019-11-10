@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.fine.FineController">
+   <children>
+      <TableView fx:id="fineTable" layoutX="40.0" layoutY="25.0" prefHeight="350.0" prefWidth="520.0">
+        <columns>
+          <TableColumn prefWidth="429.0" text="Название" />
+          <TableColumn prefWidth="95.0" text="Цена" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

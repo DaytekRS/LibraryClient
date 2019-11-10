@@ -3,6 +3,7 @@ package by.pdu.library.windows.authorization;
 import by.pdu.library.Main;
 import by.pdu.library.domain.Employe;
 import by.pdu.library.mapper.EmployeMapper;
+import by.pdu.library.mapper.FineMapper;
 import by.pdu.library.mapper.LanguageMapper;
 import by.pdu.library.mapper.ReadingRoomMapper;
 import by.pdu.library.utils.AlertWindow;
@@ -40,6 +41,9 @@ public class AuthorizationController extends Window {
 
         ReadingRoomMapper readingRoomMapper = sqlSessionFactory.openSession().getMapper(ReadingRoomMapper.class);
         ctx.inject(ReadingRoomMapper.class, "readingRoomMapper", readingRoomMapper);
+
+        FineMapper fineMapper = sqlSessionFactory.openSession().getMapper(FineMapper.class);
+        ctx.inject(FineMapper.class, "fineMapper", fineMapper);
     }
 
     @FXML

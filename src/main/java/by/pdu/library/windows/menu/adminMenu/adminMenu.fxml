@@ -5,7 +5,8 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.AdminMenuController">
    <children>
-      <Button fx:id="employeButton" layoutX="130.0" layoutY="32.0" mnemonicParsing="false" onAction="#onEmploye" prefHeight="25.0" prefWidth="101.0" text="Сотрудники" />
+      <Button fx:id="employeButton" layoutX="130.0" layoutY="32.0" mnemonicParsing="false" onAction="#onEmploye" prefHeight="25.0" prefWidth="106.0" text="Сотрудники" />
       <Button layoutX="130.0" layoutY="93.0" mnemonicParsing="false" onAction="#onReadingRoom" text="Читальные залы" />
+      <Button layoutX="130.0" layoutY="148.0" mnemonicParsing="false" onAction="#onFine" prefHeight="25.0" prefWidth="106.0" text="Штрафы" />
    </children>
 </AnchorPane>
