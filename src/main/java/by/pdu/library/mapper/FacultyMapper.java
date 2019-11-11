@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface FacultyMapper {
     List<Faculty> getFaculty();
+
+    void insertFaculty(String name);
 }

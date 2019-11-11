@@ -25,7 +25,12 @@
             id as "language_id",
             name as "language_name"
         FROM
-            language
+            LANGUAGE
     </select>
 
+    <insert id="insertLanguage" >
+        INSERT INTO
+            LANGUAGE(name)
+        VALUES (#{name})
+    </insert>
 </mapper>

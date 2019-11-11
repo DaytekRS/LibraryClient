@@ -18,4 +18,10 @@
         FROM
             FINES f
     </select>
+
+    <insert id="insertFine" >
+        INSERT INTO
+            FINE(name,price)
+        VALUES (#{name},#{price})
+    </insert>
 </mapper>

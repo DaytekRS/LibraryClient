@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GradeMapper {
     List<Grade> getGrade();
+
+    void insertGrade(String name);
 }

@@ -17,4 +17,10 @@
         FROM
             GRADE
     </select>
+
+    <insert id="insertGrade">
+        INSERT INTO
+            GRADE(name)
+        VALUES (#{name})
+    </insert>
 </mapper>

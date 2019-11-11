@@ -18,4 +18,10 @@
         FROM
             READING_ROOM r
     </select>
+
+    <insert id="insertReadingRoom">
+        INSERT INTO
+            READING_ROOM(name,address)
+        VALUES (#{name}, #{address})
+    </insert>
 </mapper>

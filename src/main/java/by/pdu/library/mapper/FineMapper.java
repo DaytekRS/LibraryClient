@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface FineMapper {
     List<Fine> getFine();
+
+    void insertFine(String name, Float price);
 }

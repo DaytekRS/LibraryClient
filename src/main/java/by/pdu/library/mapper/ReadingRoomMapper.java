@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ReadingRoomMapper {
     List<ReadingRoom> getReadingRoom();
+
+    void insertReadingRoom(String name, String address);
 }

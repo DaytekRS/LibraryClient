@@ -8,4 +8,6 @@ public interface LanguageMapper {
     Language getLanguageById(Integer id);
 
     List getLanguage();
+
+    void insertLanguage(String name);
 }

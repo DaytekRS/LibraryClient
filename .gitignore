@@ -6,4 +6,4 @@ out
 *.ivs
 .*
 !.gitignore
-*-local.properties
+git remote add origin https://github.com/DaytekRS/LibraryClient.git

@@ -17,4 +17,10 @@
         FROM
             FACULTY
     </select>
+
+    <insert id="insertFaculty" >
+        INSERT INTO
+            FACULTY(name)
+        VALUES (#{name})
+    </insert>
 </mapper>
