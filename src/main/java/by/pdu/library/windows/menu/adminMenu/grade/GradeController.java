@@ -4,6 +4,7 @@ import by.pdu.library.domain.Faculty;
 import by.pdu.library.domain.Grade;
 import by.pdu.library.mapper.FacultyMapper;
 import by.pdu.library.mapper.GradeMapper;
+import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.Window;
@@ -40,6 +41,19 @@ public class GradeController extends Window {
             System.out.println("add");
             update();
         }else System.out.println("cancel");
+    }
+
+    @FXML
+    private void removeGrade(){
+        Object obj = gradeTable.getSelectionModel().getSelectedItem();
+        if (obj==null){
+            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            return;
+        }
+        Grade grade = (Grade) obj;
+        GradeMapper mapper = ctx.getBean("gradeMapper",GradeMapper.class);
+        mapper.removeGrade(grade.getId());
+        update();
     }
 
     private void update() {
