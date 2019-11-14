@@ -47,7 +47,7 @@ public class AdminMenuController extends Window {
     @FXML
     private void onGrade() {
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-        loader.load("windows/menu/adminMenu/grade/grade.fxml", "Преподавательские степени", ((Stage) employeButton.getScene().getWindow()), 505, 400);
+        loader.load("windows/menu/adminMenu/grade/grade.fxml", "Преподавательские степени", ((Stage) employeButton.getScene().getWindow()), 600, 400);
     }
 
     @FXML
