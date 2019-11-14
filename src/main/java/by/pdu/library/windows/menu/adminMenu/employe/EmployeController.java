@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class EmployeController extends Window {
     @FXML
@@ -30,4 +31,5 @@ public class EmployeController extends Window {
 
 
     }
+
 }

@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class GroupController extends Window {
     @FXML
@@ -26,4 +27,6 @@ public class GroupController extends Window {
         columns.get(0).setCellValueFactory(new PropertyValueFactory<Group, String>("name"));
         columns.get(1).setCellValueFactory(new PropertyValueFactory<Group, String>("faculty"));
     }
+
+
 }

@@ -10,4 +10,8 @@ public interface GradeMapper {
     void insertGrade(String name);
 
     void removeGrade(Long id);
+
+    void updateGrade(Grade grade);
+
+    void updateGrade(Long id, String name);
 }

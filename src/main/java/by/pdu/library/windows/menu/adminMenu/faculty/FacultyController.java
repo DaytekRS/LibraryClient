@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class FacultyController extends Window {
     @FXML
@@ -24,4 +25,6 @@ public class FacultyController extends Window {
         ObservableList<TableColumn> columns = facultyTable.getColumns();
         columns.get(0).setCellValueFactory(new PropertyValueFactory<Faculty, String>("name"));
     }
+
+
 }

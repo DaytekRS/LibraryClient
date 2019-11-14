@@ -84,14 +84,14 @@ public class AuthorizationController extends Window {
             boolean find=false;
             for (Employe employe : employeMapper.getEmploye()){
                 if (employe.getLogin().equals(login.getText())){
-                    loader.load("windows/menu/menu.fxml","Меню",((Stage) login.getScene().getWindow()),360,410);
+                    loader.load("windows/menu/menu.fxml","Меню",stage,360,410);
                     find=true;
                     break;
                 }
             }
 
             if(!find){
-                loader.load("windows/menu/adminMenu/adminMenu.fxml","Меню",((Stage) login.getScene().getWindow()),360,410);
+                loader.load("windows/menu/adminMenu/adminMenu.fxml","Меню",stage,360,410);
             }
 
 
@@ -103,4 +103,5 @@ public class AuthorizationController extends Window {
             AlertWindow.ErrorAlert("Введен неверный логин или пароль. Повторите попытку");
         }
     }
+
 }
