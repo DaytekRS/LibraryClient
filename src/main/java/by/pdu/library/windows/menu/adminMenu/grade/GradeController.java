@@ -6,6 +6,7 @@ import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.Window;
+import by.pdu.library.windows.menu.adminMenu.AdminWindow;
 import by.pdu.library.windows.menu.adminMenu.grade.update.UpdateController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-public class GradeController extends Window {
+public class GradeController extends AdminWindow {
     @FXML
     private TableView gradeTable;
 

@@ -1,19 +1,17 @@
 package by.pdu.library.windows.menu.adminMenu.employe;
 
 import by.pdu.library.domain.Employe;
-import by.pdu.library.domain.ReadingRoom;
 import by.pdu.library.mapper.EmployeMapper;
 import by.pdu.library.utils.support.ApplicationContext;
-import by.pdu.library.windows.Window;
+import by.pdu.library.windows.menu.adminMenu.AdminWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
-public class EmployeController extends Window {
+public class EmployeController extends AdminWindow {
     @FXML
     private TableView employeTable;
 
@@ -21,7 +19,7 @@ public class EmployeController extends Window {
     @Override
     public void setApplicationContext(ApplicationContext ctx) {
         super.setApplicationContext(ctx);
-        EmployeMapper employeMapper = ctx.getBean("employeMapper",EmployeMapper.class);
+        EmployeMapper employeMapper = ctx.getBean("employeMapper", EmployeMapper.class);
         ObservableList<Employe> employes = FXCollections.observableArrayList(employeMapper.getEmploye());
         employeTable.setItems(employes);
         ObservableList<TableColumn> columns = employeTable.getColumns();

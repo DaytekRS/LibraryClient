@@ -16,6 +16,7 @@
             name as "faculty_name"
         FROM
             FACULTY
+        WHERE REMOVED_DATE IS NULL
     </select>
 
     <insert id="insertFaculty" >
@@ -23,4 +24,16 @@
             FACULTY(name)
         VALUES (#{name})
     </insert>
+
+    <update id="updateFaculty">
+        UPDATE FACULTY
+        SET NAME = #{name}
+        WHERE id = #{id}
+    </update>
+
+    <update id="removeFaculty">
+        UPDATE FACULTY
+        SET REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE id = #{id}
+    </update>
 </mapper>

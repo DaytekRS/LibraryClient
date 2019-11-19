@@ -17,11 +17,11 @@ public abstract class Window {
     }
 
 
-    public void setStage(Stage stage){
-        this.stage=stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
-    public void commit(){
+    public void commit() {
         SqlSession session = ctx.getBean("session", SqlSession.class);
         session.commit();
     }

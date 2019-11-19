@@ -4,8 +4,6 @@ import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.Window;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 
 public class AdminMenuController extends Window {
@@ -42,7 +40,7 @@ public class AdminMenuController extends Window {
     @FXML
     private void onFaculty() {
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-        loader.load("windows/menu/adminMenu/faculty/faculty.fxml", "Факультеты", stage, 505, 400);
+        loader.load("windows/menu/adminMenu/faculty/faculty.fxml", "Факультеты", stage, 600, 400);
     }
 
     @FXML
