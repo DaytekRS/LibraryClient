@@ -21,7 +21,7 @@ public class AdminMenuController extends Window {
     @FXML
     private void onReadingRoom() {
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-        loader.load("windows/menu/adminMenu/readingRoom/readingRoom.fxml", "Читальные залы", stage, 600, 400);
+        loader.load("windows/menu/adminMenu/readingRoom/readingRoom.fxml", "Читальные залы", stage, 700, 400);
     }
 
 

@@ -26,6 +26,7 @@ public class AuthorizationController extends Window {
 
     private void loadMappers(SqlSessionFactory sqlSessionFactory) {
         SqlSession session = sqlSessionFactory.openSession();
+
         ctx.inject(SqlSession.class, "session", session);
         LanguageMapper languageMapper = session.getMapper(LanguageMapper.class);
         ctx.inject(LanguageMapper.class, "languageMapper", languageMapper);
@@ -51,7 +52,15 @@ public class AuthorizationController extends Window {
         GroupMapper groupMapper = session.getMapper(GroupMapper.class);
         ctx.inject(GroupMapper.class, "groupMapper", groupMapper);
 
-
+       /* try {
+            employeMapper.createEmploye("daytek", "soulMON705");
+        }catch (PersistenceException ex){
+            if (ex.getCause().getMessage().contains("ORA-01920")){
+                AlertWindow.ErrorAlert("Такой пользователь существует.\nПопробуйте снова.");
+            }else{
+                AlertWindow.ErrorAlert();
+            }
+        }*/
     }
 
     @FXML
@@ -69,23 +78,18 @@ public class AuthorizationController extends Window {
             ctx.inject(SqlSessionFactory.class, "sqlSessionFactory", sqlSessionFactory);
             loadMappers(sqlSessionFactory);
 
-
             EmployeMapper employeMapper = ctx.getBean("employeMapper", EmployeMapper.class);
 
             LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-            boolean find = false;
-            for (Employe employe : employeMapper.getEmploye()) {
-                if (employe.getLogin().equals(login.getText())) {
-                    loader.load("windows/menu/menu.fxml", "Меню", stage, 360, 410);
-                    find = true;
-                    break;
-                }
-            }
 
-            if (!find) {
+            String role = employeMapper.getRole();
+            if (role == null) {
                 loader.load("windows/menu/adminMenu/adminMenu.fxml", "Меню", stage, 360, 410);
+            } else if (role.equals("EMPLOYE_LIBRARY")) {
+                Employe user = employeMapper.getEmployeByLogin(login.getText());
+                ctx.inject(Employe.class, "user", user);
+                loader.load("windows/menu/menu.fxml", "Меню", stage, 360, 410);
             }
-
 
         } catch (IOException e) {
             AlertWindow.ErrorAlert("Не найден конфигурационный файл");

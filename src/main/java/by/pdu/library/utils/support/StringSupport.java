@@ -14,7 +14,7 @@ public class StringSupport {
     }
 
     public static String replaceSpaces(String text){
-        return text.replaceAll("\\s+","");
+        return text.replaceAll("\\s+"," ");
     }
 
     public static boolean containsDigital(String text){

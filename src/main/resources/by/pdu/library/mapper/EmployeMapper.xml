@@ -14,6 +14,11 @@
                     resultMap="by.pdu.library.mapper.ReadingRoomMapper.readingRoomResultMap"/>
     </resultMap>
 
+    <resultMap id="roleResultMap" type="java.util.List">
+        <collection property="room" javaType="by.pdu.library.domain.ReadingRoom"
+                    resultMap="by.pdu.library.mapper.ReadingRoomMapper.readingRoomResultMap"/>
+    </resultMap>
+
     <select id="getEmploye" resultMap="employeResultMap">
         SELECT
             e.id AS "employe_id",
@@ -24,11 +29,35 @@
             r.name AS "readingRoom_name",
             r.address AS "readingRoom_address"
         FROM
-            EMPLOYE e
+            ADMIN.EMPLOYE e
                 LEFT JOIN  READING_ROOM r ON e.reading_room_id=r.id
         WHERE
             e.REMOVED_DATE IS NULL
     </select>
 
+    <select id="getEmployeByLogin" resultMap="employeResultMap">
+        SELECT
+        e.id AS "employe_id",
+        e.fio AS "employe_fio",
+        e.login AS "employe_login",
+        e.password AS "employe_password",
+        r.id AS "readingRoom_id",
+        r.name AS "readingRoom_name",
+        r.address AS "readingRoom_address"
+        FROM
+            ADMIN.EMPLOYE e
+            LEFT JOIN  ADMIN.READING_ROOM r ON e.reading_room_id=r.id
+        WHERE
+            e.REMOVED_DATE IS NULL AND
+            e.login = #{login}
+    </select>
+
+    <select id="createEmploye" statementType = "CALLABLE">
+        {call CREATE_USER(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN})}
+    </select>
+
+    <select id="getRole" resultType="java.lang.String">
+        select GRANTED_ROLE from user_role_privs WHERE ADMIN_OPTION = 'NO' AND rownum=1
+    </select>
 
 </mapper>

@@ -28,16 +28,7 @@ public class FacultyController extends AdminWindow {
 
     @FXML
     private void addFaculty() {
-        Stage stage = new Stage();
-        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-        loader.loadModal("windows/menu/adminMenu/faculty/add/add.fxml",
-                "Добавить степень преподавателя",
-                stage,
-                this.stage,
-                275,
-                130);
-        stage.showAndWait();
-
+        Stage stage = modalWindow("windows/menu/adminMenu/faculty/add/add.fxml","Добавить факультет",275,130);
         Object data = stage.getUserData();
         if (data != null && (Integer) data == Window.CLICK_ADD) update();
 
@@ -69,7 +60,7 @@ public class FacultyController extends AdminWindow {
         Stage stage = new Stage();
 
         UpdateController controller = (UpdateController) loader.loadModal("windows/menu/adminMenu/faculty/update/update.fxml",
-                "Редактировать степень преподавателя",
+                "Редактировать факультет",
                 stage,
                 this.stage,
                 275,

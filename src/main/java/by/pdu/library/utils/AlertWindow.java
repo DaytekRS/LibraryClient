@@ -28,4 +28,8 @@ public class AlertWindow {
         Optional<ButtonType> result = alert.showAndWait();
         return result.get();
     }
+
+    public static void ErrorAlert(){
+        ErrorAlert("Фиг пойми что за ошибка ;).\nТут мои привилегии кончаются\n Бегите глупцы :D");
+    }
 }

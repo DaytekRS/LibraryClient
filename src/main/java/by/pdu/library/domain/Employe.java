@@ -9,5 +9,4 @@ public class Employe {
     private String password;
     private String FIO;
     private ReadingRoom room;
-
 }

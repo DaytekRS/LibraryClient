@@ -17,6 +17,10 @@
             r.address AS "readingRoom_address"
         FROM
             READING_ROOM r
+        WHERE
+            r.REMOVED_DATE IS NULL
+        ORDER BY
+            r.ID ASC
     </select>
 
     <insert id="insertReadingRoom">
@@ -24,4 +28,16 @@
             READING_ROOM(name,address)
         VALUES (#{name}, #{address})
     </insert>
+
+    <update id="removeReadingRoom">
+        UPDATE READING_ROOM
+        SET REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateReadingRoom">
+        UPDATE READING_ROOM
+        SET NAME = #{name}, ADDRESS = #{address}
+        WHERE id = #{id}
+    </update>
 </mapper>
