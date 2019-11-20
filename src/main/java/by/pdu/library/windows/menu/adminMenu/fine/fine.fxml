@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.fine.FineController">
+<AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.fine.FineController">
    <children>
       <TableView fx:id="fineTable" layoutX="40.0" layoutY="25.0" prefHeight="350.0" prefWidth="520.0">
         <columns>
@@ -13,5 +13,9 @@
           <TableColumn prefWidth="95.0" text="Цена" />
         </columns>
       </TableView>
+      <Button layoutX="595.0" layoutY="32.0" mnemonicParsing="false" onAction="#addFine" prefHeight="25.0" prefWidth="60.0" text="Button" />
+      <Button layoutX="599.0" layoutY="74.0" mnemonicParsing="false" onAction="#removeFine" text="Button" />
+      <Button layoutX="595.0" layoutY="113.0" mnemonicParsing="false" onAction="#updateFine" text="Button" />
+      <Button layoutX="595.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancelButton" text="Button" />
    </children>
 </AnchorPane>

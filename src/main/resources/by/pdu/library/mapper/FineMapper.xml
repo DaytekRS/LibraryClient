@@ -16,12 +16,26 @@
             f.name AS "fine_name",
             f.price AS "fine_price"
         FROM
-            FINES f
+            ADMIN.FINES f
+        WHERE
+            f.REMOVED_DATE IS NULL
     </select>
 
     <insert id="insertFine" >
         INSERT INTO
-            FINE(name,price)
+            ADMIN.FINES(name,price)
         VALUES (#{name},#{price})
     </insert>
+
+    <update id="removeFine">
+        UPDATE ADMIN.FINES
+        SET REMOVED_DATE = (SELECT sysdate FROM dual)
+        WHERE ID = #{id}
+    </update>
+
+    <update  id="updateFine">
+        UPDATE ADMIN.FINES
+        SET NAME = #{name}, PRICE = #{price}
+        WHERE ID = #{id}
+    </update>
 </mapper>

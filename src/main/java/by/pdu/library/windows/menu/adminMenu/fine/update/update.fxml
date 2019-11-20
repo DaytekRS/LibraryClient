@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="by.pdu.library.windows.menu.adminMenu.fine.update.UpdateController"
+            prefHeight="165.0" prefWidth="270.0">
+<children>
+    <TextField fx:id="nameField" layoutX="46.0" layoutY="37.0" prefHeight="25.0" prefWidth="169.0" promptText="Название" />
+    <TextField fx:id="priceField" layoutX="46.0" layoutY="82.0" prefHeight="25.0" prefWidth="169.0" promptText="Стоимость" />
+    <Button layoutX="169.0" layoutY="125.0" mnemonicParsing="false" onAction="#update" text="Изменить" />
+</children>
+</AnchorPane>
