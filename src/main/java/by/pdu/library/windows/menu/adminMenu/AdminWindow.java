@@ -12,7 +12,7 @@ public class AdminWindow extends Window {
         loader.load("windows/menu/adminMenu/adminMenu.fxml", "Меню", stage, 360, 410);
     }
 
-    protected Stage modalWindow(String fxml, String title,int width,int height){
+    protected Stage modalWindow(String fxml, String title, int width, int height) {
         Stage stage = new Stage();
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
         loader.loadModal(fxml,

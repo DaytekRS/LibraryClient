@@ -33,4 +33,5 @@
             LANGUAGE(name)
         VALUES (#{name})
     </insert>
+
 </mapper>

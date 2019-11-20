@@ -52,15 +52,7 @@ public class AuthorizationController extends Window {
         GroupMapper groupMapper = session.getMapper(GroupMapper.class);
         ctx.inject(GroupMapper.class, "groupMapper", groupMapper);
 
-       /* try {
-            employeMapper.createEmploye("daytek", "soulMON705");
-        }catch (PersistenceException ex){
-            if (ex.getCause().getMessage().contains("ORA-01920")){
-                AlertWindow.ErrorAlert("Такой пользователь существует.\nПопробуйте снова.");
-            }else{
-                AlertWindow.ErrorAlert();
-            }
-        }*/
+
     }
 
     @FXML
@@ -82,12 +74,13 @@ public class AuthorizationController extends Window {
 
             LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
 
+            Employe user = employeMapper.getEmployeByLogin(login.getText());
+            ctx.inject(Employe.class, "user", user);
+
             String role = employeMapper.getRole();
             if (role == null) {
                 loader.load("windows/menu/adminMenu/adminMenu.fxml", "Меню", stage, 360, 410);
             } else if (role.equals("EMPLOYE_LIBRARY")) {
-                Employe user = employeMapper.getEmployeByLogin(login.getText());
-                ctx.inject(Employe.class, "user", user);
                 loader.load("windows/menu/menu.fxml", "Меню", stage, 360, 410);
             }
 

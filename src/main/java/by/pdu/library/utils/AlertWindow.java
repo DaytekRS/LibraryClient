@@ -29,7 +29,7 @@ public class AlertWindow {
         return result.get();
     }
 
-    public static void ErrorAlert(){
-        ErrorAlert("Фиг пойми что за ошибка ;).\nТут мои привилегии кончаются\n Бегите глупцы :D");
+    public static void ErrorAlert() {
+        ErrorAlert("Фиг пойми что за ошибка ;)\nТут мои привилегии кончаются\nБегите глупцы :D");
     }
 }

@@ -12,8 +12,7 @@ public interface ReadingRoomMapper {
 
     void removeReadingRoom(Long id);
 
-    void updateReadingRoom(@Param("id") Long id,@Param("name") String name, @Param("address") String address);
+    void updateReadingRoom(@Param("id") Long id, @Param("name") String name, @Param("address") String address);
 
     void updateReadingRoom(ReadingRoom room);
-
 }

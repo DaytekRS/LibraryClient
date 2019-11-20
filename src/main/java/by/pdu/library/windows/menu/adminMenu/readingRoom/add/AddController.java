@@ -23,11 +23,11 @@ public class AddController extends SupportWindow {
         String name = StringSupport.convertName(nameField.getText());
         String address = StringSupport.replaceSpaces(addressField.getText());
         if (name.equals("")) {
-            AlertWindow.ErrorAlert("Поле "+ nameField.getPromptText()+" не может быть пустым");
+            AlertWindow.ErrorAlert("Поле " + nameField.getPromptText() + " не может быть пустым");
             return;
         }
         if (address.equals("")) {
-            AlertWindow.ErrorAlert("Поле "+ addressField.getPromptText()+" не может быть пустым");
+            AlertWindow.ErrorAlert("Поле " + addressField.getPromptText() + " не может быть пустым");
             return;
         }
         ReadingRoomMapper mapper = ctx.getBean("readingRoomMapper", ReadingRoomMapper.class);

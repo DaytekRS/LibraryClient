@@ -29,7 +29,7 @@ public class ReadingRoomController extends AdminWindow {
 
     @FXML
     private void addReadingRoom() {
-        Stage stage = modalWindow("windows/menu/adminMenu/readingRoom/add/add.fxml","Добавить читальный зал",295,160);
+        Stage stage = modalWindow("windows/menu/adminMenu/readingRoom/add/add.fxml", "Добавить читальный зал", 295, 160);
         Object data = stage.getUserData();
         if (data != null && (Integer) data == Window.CLICK_ADD) update();
     }
@@ -73,7 +73,7 @@ public class ReadingRoomController extends AdminWindow {
             update();
     }
 
-    private void update(){
+    private void update() {
         System.out.println("update");
         ReadingRoomMapper readingRoomMapper = ctx.getBean("readingRoomMapper", ReadingRoomMapper.class);
         ObservableList<ReadingRoom> readingRooms = FXCollections.observableArrayList(readingRoomMapper.getReadingRoom());
@@ -81,7 +81,7 @@ public class ReadingRoomController extends AdminWindow {
         readingRoomTable.refresh();
     }
 
-    private void init(){
+    private void init() {
         update();
         ObservableList<TableColumn> columns = readingRoomTable.getColumns();
         columns.get(0).setCellValueFactory(new PropertyValueFactory<ReadingRoom, Integer>("id"));

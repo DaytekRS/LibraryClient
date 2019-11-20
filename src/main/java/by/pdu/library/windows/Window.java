@@ -9,6 +9,7 @@ public abstract class Window {
     public static int CLICK_ADD = 1;
     public static int CLICK_CANCEL = 2;
     public static int CLICK_EDIT = 3;
+    public static int WINDOW_ERROR = 4;
 
     protected ApplicationContext ctx;
 

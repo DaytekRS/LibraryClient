@@ -15,7 +15,7 @@ public class AdminMenuController extends Window {
     @FXML
     private void onEmploye() {
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-        loader.load("windows/menu/adminMenu/employe/employe.fxml", "Сотрудники", stage, 600, 400);
+        loader.load("windows/menu/adminMenu/employe/employe.fxml", "Сотрудники", stage, 690, 400);
     }
 
     @FXML

@@ -3,7 +3,6 @@ package by.pdu.library.utils.support;
 import by.pdu.library.Main;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.windows.Window;
-import by.pdu.library.windows.authorization.AuthorizationController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,16 +23,16 @@ public class LoadFXML {
         this.ctx = ctx;
     }
 
-    public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height){
+    public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height) {
         primaryStage.initOwner(owner);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
         return load(fxml, title, primaryStage, width, height);
     }
 
-    public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height, boolean resizable){
+    public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height, boolean resizable) {
         primaryStage.initOwner(owner);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
-        return load(fxml, title, primaryStage, width, height,resizable);
+        return load(fxml, title, primaryStage, width, height, resizable);
     }
 
     public Window load(String fxml, String title, Stage primaryStage, int width, int height) {

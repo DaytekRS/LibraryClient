@@ -28,7 +28,7 @@ public class FacultyController extends AdminWindow {
 
     @FXML
     private void addFaculty() {
-        Stage stage = modalWindow("windows/menu/adminMenu/faculty/add/add.fxml","Добавить факультет",275,130);
+        Stage stage = modalWindow("windows/menu/adminMenu/faculty/add/add.fxml", "Добавить факультет", 275, 130);
         Object data = stage.getUserData();
         if (data != null && (Integer) data == Window.CLICK_ADD) update();
 

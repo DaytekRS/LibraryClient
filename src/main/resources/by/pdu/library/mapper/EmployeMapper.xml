@@ -24,7 +24,6 @@
             e.id AS "employe_id",
             e.fio AS "employe_fio",
             e.login AS "employe_login",
-            e.password AS "employe_password",
             r.id AS "readingRoom_id",
             r.name AS "readingRoom_name",
             r.address AS "readingRoom_address"
@@ -40,7 +39,6 @@
         e.id AS "employe_id",
         e.fio AS "employe_fio",
         e.login AS "employe_login",
-        e.password AS "employe_password",
         r.id AS "readingRoom_id",
         r.name AS "readingRoom_name",
         r.address AS "readingRoom_address"
@@ -56,8 +54,17 @@
         {call CREATE_USER(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN})}
     </select>
 
+    <insert id="insertEmploye">
+        INSERT INTO ADMIN.EMPLOYE(FIO,READING_ROOM_ID,LOGIN)
+        VALUES (#{FIO},#{roomID},#{login})
+    </insert>
+
     <select id="getRole" resultType="java.lang.String">
         select GRANTED_ROLE from user_role_privs WHERE ADMIN_OPTION = 'NO' AND rownum=1
+    </select>
+
+    <select id="dropEmploye" statementType = "CALLABLE">
+        {call DROP_USER(#{login, jdbcType =  VARCHAR, mode = IN})}
     </select>
 
 </mapper>

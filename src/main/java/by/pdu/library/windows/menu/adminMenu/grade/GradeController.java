@@ -29,7 +29,7 @@ public class GradeController extends AdminWindow {
 
     @FXML
     private void addGrade() {
-        Stage stage = modalWindow("windows/menu/adminMenu/grade/add/add.fxml","Добавить степень преподавателя",275,130);
+        Stage stage = modalWindow("windows/menu/adminMenu/grade/add/add.fxml", "Добавить степень преподавателя", 275, 130);
         Object data = stage.getUserData();
         if (data != null && (Integer) data == Window.CLICK_ADD) update();
 
