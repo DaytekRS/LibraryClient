@@ -50,21 +50,17 @@
             e.login = #{login}
     </select>
 
-    <select id="createEmploye" statementType = "CALLABLE">
-        {call CREATE_USER(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN})}
-    </select>
-
-    <insert id="insertEmploye">
-        INSERT INTO ADMIN.EMPLOYE(FIO,READING_ROOM_ID,LOGIN)
-        VALUES (#{FIO},#{roomID},#{login})
+    <insert id="createEmploye" statementType = "CALLABLE">
+        {call CREATE_USER(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN},
+        #{FIO, jdbcType =  VARCHAR, mode = IN}, #{roomId, jdbcType =  INTEGER, mode = IN})}
     </insert>
 
     <select id="getRole" resultType="java.lang.String">
         select GRANTED_ROLE from user_role_privs WHERE ADMIN_OPTION = 'NO' AND rownum=1
     </select>
 
-    <select id="dropEmploye" statementType = "CALLABLE">
+    <update id="dropEmploye" statementType = "CALLABLE">
         {call DROP_USER(#{login, jdbcType =  VARCHAR, mode = IN})}
-    </select>
+    </update>
 
 </mapper>

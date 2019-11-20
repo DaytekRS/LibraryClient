@@ -41,12 +41,11 @@ public class AddController extends SupportWindow {
 
         try {
             EmployeMapper employeMapper = ctx.getBean("employeMapper", EmployeMapper.class);
-            employeMapper.createEmploye(login, password);
-            employeMapper.insertEmploye(name, room.getId(), login);
+            employeMapper.createEmploye(login, password,name,room.getId());
             close(Window.CLICK_ADD);
             return;
         } catch (PersistenceException ex) {
-            if (ex.getCause().getMessage().contains("ORA-01920")) {
+            if (ex.getCause().getMessage().contains("ORA-01920") || ex.getCause().getMessage().contains("ORA-20001")) {
                 AlertWindow.ErrorAlert("Такой пользователь существует.\nПопробуйте снова.");
             } else {
                 AlertWindow.ErrorAlert();

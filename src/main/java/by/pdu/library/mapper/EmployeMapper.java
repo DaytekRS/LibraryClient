@@ -10,9 +10,10 @@ public interface EmployeMapper {
 
     Employe getEmployeByLogin(@Param("login") String login);
 
-    void createEmploye(@Param("login") String login, @Param("password") String password);
-
-    void insertEmploye(@Param("FIO") String FIO, @Param("roomID") Long roomID, @Param("login") String login);
+    void createEmploye(@Param("login") String login,
+                       @Param("password") String password,
+                       @Param("FIO") String FIO,
+                       @Param("roomId") Long roomId);
 
     String getRole();
 
