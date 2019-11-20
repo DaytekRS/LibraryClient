@@ -2,9 +2,12 @@ package by.pdu.library.windows.menu.adminMenu.employe;
 
 import by.pdu.library.domain.Employe;
 import by.pdu.library.mapper.EmployeMapper;
+import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.ApplicationContext;
+import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.Window;
 import by.pdu.library.windows.menu.adminMenu.AdminWindow;
+import by.pdu.library.windows.menu.adminMenu.employe.update.UpdateController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,6 +33,45 @@ public class EmployeController extends AdminWindow {
         Object data = stage.getUserData();
         System.out.println(data);
         if (data != null && (Integer) data == Window.CLICK_ADD) update();
+    }
+
+    @FXML
+    private void removeEmploye() {
+        Object obj = employeTable.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            return;
+        }
+        Employe employe = (Employe) obj;
+        EmployeMapper mapper = ctx.getBean("employeMapper", EmployeMapper.class);
+        mapper.dropEmploye(employe.getLogin());
+        commit();
+        update();
+    }
+
+    @FXML
+    private void updateEmploye() {
+        Object obj = employeTable.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            return;
+        }
+        Employe employe = (Employe) obj;
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        Stage stage = new Stage();
+
+        UpdateController controller = (UpdateController) loader.loadModal("windows/menu/adminMenu/employe/update/update.fxml",
+                "Редактировать сотрудника",
+                stage,
+                this.stage,
+                295,
+                165);
+
+        controller.setEmploye(employe);
+        stage.showAndWait();
+        Object data = stage.getUserData();
+        if (data != null && (Integer) data == Window.CLICK_EDIT)
+            update();
     }
 
     private void update() {

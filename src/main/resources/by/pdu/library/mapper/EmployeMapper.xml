@@ -32,6 +32,7 @@
                 LEFT JOIN  READING_ROOM r ON e.reading_room_id=r.id
         WHERE
             e.REMOVED_DATE IS NULL
+        ORDER BY e.id ASC
     </select>
 
     <select id="getEmployeByLogin" resultMap="employeResultMap">
@@ -61,6 +62,13 @@
 
     <update id="dropEmploye" statementType = "CALLABLE">
         {call DROP_USER(#{login, jdbcType =  VARCHAR, mode = IN})}
+    </update>
+
+    <update id="updateEmploye">
+        UPDATE ADMIN.EMPLOYE
+        SET FIO = #{FIO}, READING_ROOM_ID = #{roomId}
+        WHERE
+            LOGIN = #{login}
     </update>
 
 </mapper>

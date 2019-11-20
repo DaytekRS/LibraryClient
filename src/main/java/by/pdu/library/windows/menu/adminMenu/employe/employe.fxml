@@ -16,5 +16,7 @@
       </TableView>
       <Button layoutX="606.0" layoutY="38.0" mnemonicParsing="false" onAction="#addEmploye" text="Button" />
       <Button layoutX="606.0" layoutY="338.0" mnemonicParsing="false" onAction="#cancelButton" text="Button" />
+      <Button layoutX="606.0" layoutY="85.0" mnemonicParsing="false" onAction="#removeEmploye" text="Button" />
+      <Button layoutX="606.0" layoutY="132.0" mnemonicParsing="false" onAction="#updateEmploye" text="Button" />
    </children>
 </AnchorPane>

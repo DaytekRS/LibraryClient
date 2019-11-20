@@ -18,4 +18,7 @@ public interface EmployeMapper {
     String getRole();
 
     void dropEmploye(@Param("login") String login);
+
+    void updateEmploye(@Param("login") String login,@Param("FIO") String FIO,
+                       @Param("roomId") Long roomId);
 }
