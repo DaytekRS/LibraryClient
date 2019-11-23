@@ -39,7 +39,7 @@ public class GradeController extends AdminWindow {
     private void removeGrade() {
         Object obj = gradeTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Grade grade = (Grade) obj;
@@ -53,7 +53,7 @@ public class GradeController extends AdminWindow {
     private void updateGrade() {
         Object obj = gradeTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Grade grade = (Grade) obj;

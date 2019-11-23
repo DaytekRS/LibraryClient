@@ -3,7 +3,6 @@ package by.pdu.library.windows.menu.adminMenu.employe.update;
 import by.pdu.library.domain.Employe;
 import by.pdu.library.domain.ReadingRoom;
 import by.pdu.library.mapper.EmployeMapper;
-import by.pdu.library.mapper.GradeMapper;
 import by.pdu.library.mapper.ReadingRoomMapper;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.ApplicationContext;
@@ -15,8 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-
-import java.util.Collections;
 
 
 public class UpdateController extends SupportWindow {
@@ -34,7 +31,7 @@ public class UpdateController extends SupportWindow {
         String name = StringSupport.replaceSpaces(nameField.getText());
 
         if (name.equals("")) {
-            AlertWindow.ErrorAlert("Не должно быть пустых полей");
+            AlertWindow.errorAlert("Не должно быть пустых полей");
             return;
         }
 

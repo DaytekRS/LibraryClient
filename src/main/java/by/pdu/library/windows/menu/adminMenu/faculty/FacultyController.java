@@ -38,7 +38,7 @@ public class FacultyController extends AdminWindow {
     private void removeFaculty() {
         Object obj = facultyTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Faculty faculty = (Faculty) obj;
@@ -52,7 +52,7 @@ public class FacultyController extends AdminWindow {
     private void updateFaculty() {
         Object obj = facultyTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Faculty faculty = (Faculty) obj;

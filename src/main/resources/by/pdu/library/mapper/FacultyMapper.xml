@@ -15,8 +15,9 @@
             id as "faculty_id",
             name as "faculty_name"
         FROM
-            FACULTY
-        WHERE REMOVED_DATE IS NULL
+            ADMIN.FACULTY
+        WHERE
+            REMOVED_DATE IS NULL
     </select>
 
     <insert id="insertFaculty" >

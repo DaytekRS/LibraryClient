@@ -1,6 +1,5 @@
 package by.pdu.library.windows.menu.adminMenu.fine;
 
-import by.pdu.library.domain.Faculty;
 import by.pdu.library.domain.Fine;
 import by.pdu.library.mapper.FineMapper;
 import by.pdu.library.utils.AlertWindow;
@@ -42,7 +41,7 @@ public class FineController extends AdminWindow {
     private void removeFine() {
         Object obj = fineTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Fine fine = (Fine) obj;
@@ -56,7 +55,7 @@ public class FineController extends AdminWindow {
     private void updateFine() {
         Object obj = fineTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Fine fine = (Fine) obj;

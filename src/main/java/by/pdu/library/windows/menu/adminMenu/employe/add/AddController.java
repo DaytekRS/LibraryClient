@@ -26,7 +26,7 @@ public class AddController extends SupportWindow {
     private void add() {
         ReadingRoom room = roomBox.getValue();
         if (room == null) {
-            AlertWindow.ErrorAlert("Выберите " + roomBox.getPromptText());
+            AlertWindow.errorAlert("Выберите " + roomBox.getPromptText());
             return;
         }
 
@@ -35,7 +35,7 @@ public class AddController extends SupportWindow {
         String password = StringSupport.replaceSpaces(passwordField.getText());
 
         if (name.equals("") || login.equals("") || password.equals("")) {
-            AlertWindow.ErrorAlert("Не должно быть пустых полей");
+            AlertWindow.errorAlert("Не должно быть пустых полей");
             return;
         }
 
@@ -45,12 +45,7 @@ public class AddController extends SupportWindow {
             close(Window.CLICK_ADD);
             return;
         } catch (PersistenceException ex) {
-            if (ex.getCause().getMessage().contains("ORA-01920") || ex.getCause().getMessage().contains("ORA-20001")) {
-                AlertWindow.ErrorAlert("Такой пользователь существует.\nПопробуйте снова.");
-            } else {
-                AlertWindow.ErrorAlert();
-                ex.printStackTrace();
-            }
+            AlertWindow.checkException(ex.getMessage());
         }
         close(Window.WINDOW_ERROR);
     }

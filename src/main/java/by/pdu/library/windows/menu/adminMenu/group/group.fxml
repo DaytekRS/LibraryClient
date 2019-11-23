@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.adminMenu.group.GroupController">
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="by.pdu.library.windows.menu.adminMenu.group.GroupController">
     <children>
         <TableView fx:id="groupTable" layoutX="25.0" layoutY="25.0" prefHeight="350.0" prefWidth="550.0">
             <columns>
-                <TableColumn prefWidth="275.0" text="Название" />
-                <TableColumn prefWidth="274.0" text="Факультет" />
+                <TableColumn prefWidth="275.0" text="Название"/>
+                <TableColumn prefWidth="274.0" text="Факультет"/>
             </columns>
         </TableView>
+        <Button layoutX="606.0" layoutY="38.0" mnemonicParsing="false" onAction="#addGroup" text="Button"/>
+        <Button layoutX="606.0" layoutY="338.0" mnemonicParsing="false" onAction="#cancelButton" text="Button"/>
+        <Button layoutX="606.0" layoutY="85.0" mnemonicParsing="false" onAction="#removeGroup" text="Button"/>
+        <Button layoutX="606.0" layoutY="132.0" mnemonicParsing="false" onAction="#updateGroup" text="Button"/>
     </children>
 </AnchorPane>

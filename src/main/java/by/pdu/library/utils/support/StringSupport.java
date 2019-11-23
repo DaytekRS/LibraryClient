@@ -26,12 +26,12 @@ public class StringSupport {
             String name = StringSupport.replaceSpaces(text.getText());
 
             if (name.equals("")) {
-                AlertWindow.ErrorAlert("Поле " + text.getPromptText() + " не может быть пустым");
+                AlertWindow.errorAlert("Поле " + text.getPromptText() + " не может быть пустым");
                 return false;
             }
 
             if (StringSupport.containsDigital(name)) {
-                AlertWindow.ErrorAlert("Поле " + text.getPromptText() + " не может содеражать цифры");
+                AlertWindow.errorAlert("Поле " + text.getPromptText() + " не может содеражать цифры");
                 return false;
             }
         }

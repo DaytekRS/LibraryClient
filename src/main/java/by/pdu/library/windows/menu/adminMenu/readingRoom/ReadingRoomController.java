@@ -38,7 +38,7 @@ public class ReadingRoomController extends AdminWindow {
     private void removeReadingRoom() {
         Object obj = readingRoomTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         ReadingRoom readingRoom = (ReadingRoom) obj;
@@ -52,7 +52,7 @@ public class ReadingRoomController extends AdminWindow {
     private void updateReadingRoom() {
         Object obj = readingRoomTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         ReadingRoom readingRoom = (ReadingRoom) obj;

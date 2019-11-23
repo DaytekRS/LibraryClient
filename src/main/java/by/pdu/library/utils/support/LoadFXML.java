@@ -53,7 +53,7 @@ public class LoadFXML {
             primaryStage.setResizable(resizable);
             return controller;
         } catch (IOException e) {
-            AlertWindow.ErrorAlert("Произошла непредвиденная ошибка.\nПрограмма будет закрыта");
+            AlertWindow.errorAlert("Произошла непредвиденная ошибка.\nПрограмма будет закрыта");
             e.printStackTrace();
             System.exit(0);
         }

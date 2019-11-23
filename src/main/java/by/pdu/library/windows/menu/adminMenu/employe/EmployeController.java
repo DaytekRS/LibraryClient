@@ -39,7 +39,7 @@ public class EmployeController extends AdminWindow {
     private void removeEmploye() {
         Object obj = employeTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Employe employe = (Employe) obj;
@@ -53,7 +53,7 @@ public class EmployeController extends AdminWindow {
     private void updateEmploye() {
         Object obj = employeTable.getSelectionModel().getSelectedItem();
         if (obj == null) {
-            AlertWindow.ErrorAlert("Нет выбранного элемента");
+            AlertWindow.errorAlert("Нет выбранного элемента");
             return;
         }
         Employe employe = (Employe) obj;

@@ -85,11 +85,11 @@ public class AuthorizationController extends Window {
             }
 
         } catch (IOException e) {
-            AlertWindow.ErrorAlert("Не найден конфигурационный файл");
+            AlertWindow.errorAlert("Не найден конфигурационный файл");
             System.exit(0);
         } catch (Exception e) {
             e.printStackTrace();
-            AlertWindow.ErrorAlert("Введен неверный логин или пароль. Повторите попытку");
+            AlertWindow.errorAlert("Введен неверный логин или пароль. Повторите попытку");
         }
     }
 

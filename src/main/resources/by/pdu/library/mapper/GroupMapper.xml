@@ -13,12 +13,35 @@
 
     <select id="getGroup" resultMap="groupResultMap">
         SELECT
-            g.id AS "department_id",
-            g.name AS "department_name",
+            g.id AS "group_id",
+            g.name AS "group_name",
             f.id AS "faculty_id",
             f.name AS "faculty_name"
         FROM
-            GROUPS g
-                LEFT JOIN FACULTY f ON g.faculty_id = f.id
+            ADMIN.GROUPS g
+            LEFT JOIN ADMIN.FACULTY f ON g.faculty_id = f.id
+        WHERE
+            g.REMOVED_DATE IS NULL
     </select>
+
+    <insert id="insertGroup">
+        INSERT INTO ADMIN.GROUPS(name,faculty_ID) VALUES(#{name},#{facultyId})
+    </insert>
+
+    <update id="updateGroup">
+        UPDATE ADMIN.GROUPS
+        SET
+            NAME = #{name},
+            FACULTY_ID = #{facultyId}
+        WHERE
+            ID = #{id}
+    </update>
+
+    <update id="dropGroup">
+        UPDATE ADMIN.GROUPS
+        SET
+            REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE
+            ID = #{id}
+    </update>
 </mapper>

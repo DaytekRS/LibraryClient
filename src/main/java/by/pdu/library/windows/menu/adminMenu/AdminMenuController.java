@@ -52,7 +52,7 @@ public class AdminMenuController extends Window {
     @FXML
     private void onGroup() {
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-        loader.load("windows/menu/adminMenu/group/group.fxml", "Группы", stage, 600, 400);
+        loader.load("windows/menu/adminMenu/group/group.fxml", "Группы", stage, 690, 400);
     }
 
 }
