@@ -34,7 +34,7 @@ public class AdminMenuController extends Window {
     @FXML
     private void onDepartment() {
         LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
-        loader.load("windows/menu/adminMenu/department/department.fxml", "Кафедры", stage, 600, 400);
+        loader.load("windows/menu/adminMenu/department/department.fxml", "Кафедры", stage, 690, 400);
     }
 
     @FXML

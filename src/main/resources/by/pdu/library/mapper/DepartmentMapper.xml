@@ -18,7 +18,29 @@
             f.id AS "faculty_id",
             f.name AS "faculty_name"
         FROM
-            DEPARTMENT d
-                LEFT JOIN FACULTY f ON d.faculty_id = f.id
+            ADMIN.DEPARTMENT d
+                LEFT JOIN ADMIN.FACULTY f ON d.faculty_id = f.id
+        WHERE d.REMOVED_DATE IS NULL
     </select>
+
+    <insert id="insertDepartment">
+        INSERT INTO ADMIN.DEPARTMENT(name,faculty_ID) VALUES(#{name},#{facultyId})
+    </insert>
+
+    <update id="updateDepartment">
+        UPDATE ADMIN.DEPARTMENT
+        SET
+            NAME = #{name},
+            FACULTY_ID = #{facultyId}
+        WHERE
+            ID = #{id}
+    </update>
+
+    <update id="dropDepartment">
+        UPDATE ADMIN.DEPARTMENT
+        SET
+            REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE
+            ID = #{id}
+    </update>
 </mapper>
