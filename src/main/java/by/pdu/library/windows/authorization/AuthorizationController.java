@@ -81,7 +81,7 @@ public class AuthorizationController extends Window {
             if (role == null) {
                 loader.load("windows/menu/adminMenu/adminMenu.fxml", "Меню", stage, 360, 410);
             } else if (role.equals("EMPLOYE_LIBRARY")) {
-                loader.load("windows/menu/menu.fxml", "Меню", stage, 360, 410);
+                loader.load("windows/menu/employeMenu/menu.fxml", "Меню", stage, 620, 460);
             }
 
         } catch (IOException e) {
