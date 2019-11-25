@@ -43,11 +43,9 @@ public class AddController extends SupportWindow {
             EmployeMapper employeMapper = ctx.getBean("employeMapper", EmployeMapper.class);
             employeMapper.createEmploye(login, password,name,room.getId());
             close(Window.CLICK_ADD);
-            return;
         } catch (PersistenceException ex) {
             AlertWindow.checkException(ex.getMessage());
         }
-        close(Window.WINDOW_ERROR);
     }
 
     @Override

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="by.pdu.library.mapper.PublishingHouseMapper">
+
+    <resultMap id="publishingHouseResultMap" type="by.pdu.library.domain.PublishingHouse">
+        <id column="publishingHouse_id" property="id"/>
+        <result column="publishingHouse_name" property="name"/>
+    </resultMap>
+
+    <select id="getPublishingHouse" resultMap="publishingHouseResultMap">
+        SELECT
+            id as "publishingHouse_id",
+            name as "publishingHouse_name"
+        FROM
+            ADMIN.Publishing_House
+        WHERE REMOVED_DATE IS NULL
+    </select>
+
+    <insert id="insertPublishingHouse" >
+        INSERT INTO ADMIN.Publishing_House(name)
+        VALUES (#{name})
+    </insert>
+
+    <update id="updatePublishingHouse">
+        UPDATE ADMIN.Publishing_House
+        SET NAME = #{name}
+        WHERE id = #{id}
+    </update>
+
+    <update id="removePublishingHouse">
+        UPDATE ADMIN.Publishing_House
+        SET REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE id = #{id}
+    </update>
+</mapper>

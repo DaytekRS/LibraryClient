@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="by.pdu.library.windows.menu.employeMenu.publishingHouse.update.UpdateController"
+            prefHeight="130.0" prefWidth="275.0">
+    <children>
+        <TextField fx:id="nameField" layoutX="37.0" layoutY="39.0" prefHeight="25.0" prefWidth="206.0" promptText="Название" />
+        <Button layoutX="190.0" layoutY="84.0" mnemonicParsing="false" onAction="#update" text="Изменить" />
+    </children>
+</AnchorPane>

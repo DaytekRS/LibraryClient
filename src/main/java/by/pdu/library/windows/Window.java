@@ -1,6 +1,7 @@
 package by.pdu.library.windows;
 
 import by.pdu.library.utils.support.ApplicationContext;
+import by.pdu.library.utils.support.LoadFXML;
 import javafx.stage.Stage;
 import org.apache.ibatis.session.SqlSession;
 
@@ -27,4 +28,16 @@ public abstract class Window {
         session.commit();
     }
 
+    protected Stage modalWindow(String fxml, String title, int width, int height) {
+        Stage stage = new Stage();
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        loader.loadModal(fxml,
+                title,
+                stage,
+                this.stage,
+                width,
+                height);
+        stage.showAndWait();
+        return stage;
+    }
 }

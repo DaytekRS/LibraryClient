@@ -22,18 +22,18 @@
 
     <insert id="insertFaculty" >
         INSERT INTO
-            FACULTY(name)
+            ADMIN.FACULTY(name)
         VALUES (#{name})
     </insert>
 
     <update id="updateFaculty">
-        UPDATE FACULTY
+        UPDATE ADMIN.FACULTY
         SET NAME = #{name}
         WHERE id = #{id}
     </update>
 
     <update id="removeFaculty">
-        UPDATE FACULTY
+        UPDATE ADMIN.FACULTY
         SET REMOVED_DATE = (SELECT sysdate FROM DUAL)
         WHERE id = #{id}
     </update>

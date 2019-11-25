@@ -29,6 +29,7 @@
         <mapper class="by.pdu.library.mapper.FacultyMapper"/>
         <mapper class="by.pdu.library.mapper.GradeMapper"/>
         <mapper class="by.pdu.library.mapper.GroupMapper"/>
+        <mapper class="by.pdu.library.mapper.PublishingHouseMapper"/>
     </mappers>
 
 

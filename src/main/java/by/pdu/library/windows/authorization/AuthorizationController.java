@@ -52,7 +52,8 @@ public class AuthorizationController extends Window {
         GroupMapper groupMapper = session.getMapper(GroupMapper.class);
         ctx.inject(GroupMapper.class, "groupMapper", groupMapper);
 
-
+        PublishingHouseMapper publishingHouseMapper = session.getMapper(PublishingHouseMapper.class);
+        ctx.inject(PublishingHouseMapper.class, "publishingHouseMapper", publishingHouseMapper);
     }
 
     @FXML
@@ -81,7 +82,7 @@ public class AuthorizationController extends Window {
             if (role == null) {
                 loader.load("windows/menu/adminMenu/adminMenu.fxml", "Меню", stage, 360, 410);
             } else if (role.equals("EMPLOYE_LIBRARY")) {
-                loader.load("windows/menu/employeMenu/menu.fxml", "Меню", stage, 620, 460);
+                loader.load("windows/menu/employeMenu/menu.fxml", "Меню", stage, 800, 460);
             }
 
         } catch (IOException e) {
