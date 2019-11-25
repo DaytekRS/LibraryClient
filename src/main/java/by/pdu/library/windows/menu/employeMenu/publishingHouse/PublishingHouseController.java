@@ -9,7 +9,9 @@ import by.pdu.library.windows.menu.employeMenu.TabController;
 import by.pdu.library.windows.menu.employeMenu.publishingHouse.update.UpdateController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class PublishingHouseController extends TabController {
@@ -18,6 +20,9 @@ public class PublishingHouseController extends TabController {
     public PublishingHouseController(TableView tableView) {
         super(tableView);
         this.tableView = tableView;
+        ObservableList<TableColumn> columns = tableView.getColumns();
+        columns.get(0).setCellValueFactory(new PropertyValueFactory<PublishingHouse, Long>("id"));
+        columns.get(1).setCellValueFactory(new PropertyValueFactory<PublishingHouse, String>("name"));
     }
 
     public void add() {

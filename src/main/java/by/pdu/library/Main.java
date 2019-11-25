@@ -5,6 +5,7 @@ import by.pdu.library.utils.support.LoadFXML;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.ibatis.session.SqlSession;
 
 public class Main extends Application {
 
@@ -22,6 +23,12 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("img/icon.png"));
         primaryStage.show();
 
+        primaryStage.setOnCloseRequest(we -> {
+            SqlSession session = ctx.getBean("session", SqlSession.class);
+            if (session != null) {
+                session.close();
+            }
+        });
     }
 
     public static void main(String[] args) {

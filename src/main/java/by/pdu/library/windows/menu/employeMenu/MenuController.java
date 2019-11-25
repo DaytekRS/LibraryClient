@@ -1,31 +1,28 @@
 package by.pdu.library.windows.menu.employeMenu;
 
-import by.pdu.library.domain.PublishingHouse;
 import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.ApplicationContextImpl;
 import by.pdu.library.windows.Window;
+import by.pdu.library.windows.menu.employeMenu.language.LanguageController;
 import by.pdu.library.windows.menu.employeMenu.publishingHouse.PublishingHouseController;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MenuController extends Window {
     @FXML
-    TableView publishingHouseTable;
+    TableView publishingHouseTable, languageTable;
 
     private ApplicationContextImpl ctxController;
 
     @FXML
     public void initialize() {
         ctxController = new ApplicationContextImpl();
-        ObservableList<TableColumn> columns = publishingHouseTable.getColumns();
-        columns.get(0).setCellValueFactory(new PropertyValueFactory<PublishingHouse, Long>("id"));
-        columns.get(1).setCellValueFactory(new PropertyValueFactory<PublishingHouse, String>("name"));
 
         PublishingHouseController publishingHouse = new PublishingHouseController(publishingHouseTable);
         ctxController.inject(PublishingHouseController.class, "publishingHouse", publishingHouse);
+
+        LanguageController language = new LanguageController(languageTable);
+        ctxController.inject(LanguageController.class, "language", language);
     }
 
     @FXML
@@ -41,6 +38,21 @@ public class MenuController extends Window {
     @FXML
     private void updatePublishingHouse() {
         ctxController.getBean("publishingHouse", PublishingHouseController.class).update();
+    }
+
+    @FXML
+    private void addLanguage() {
+        ctxController.getBean("language", LanguageController.class).add();
+    }
+
+    @FXML
+    private void removeLanguage() {
+        ctxController.getBean("language", LanguageController.class).remove();
+    }
+
+    @FXML
+    private void updateLanguage() {
+        ctxController.getBean("language", LanguageController.class).update();
     }
 
 

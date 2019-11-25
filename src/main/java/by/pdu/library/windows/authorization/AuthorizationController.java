@@ -61,7 +61,6 @@ public class AuthorizationController extends Window {
         SqlSessionFactory sqlSessionFactory;
         try {
             Properties properties = new Properties();
-            System.out.println(login.getText());
             properties.setProperty("username", login.getText());
             properties.setProperty("password", password.getText());
             Reader inputStream = Resources.getResourceAsReader("mybatis-config.xml");

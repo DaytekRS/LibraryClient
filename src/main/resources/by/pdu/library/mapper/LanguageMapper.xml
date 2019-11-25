@@ -15,9 +15,9 @@
             id as "language_id",
             name as "language_name"
         FROM
-            language
+            admin.language
         WHERE
-            id = #{id}
+            id = #{id} AND REMOVED_DATE IS NULL
     </select>
 
     <select id="getLanguage" resultMap="languageResultMap">
@@ -25,13 +25,27 @@
             id as "language_id",
             name as "language_name"
         FROM
-            LANGUAGE
+            admin.LANGUAGE
+        WHERE
+            REMOVED_DATE IS NULL
     </select>
 
     <insert id="insertLanguage" >
-        INSERT INTO
-            LANGUAGE(name)
+        INSERT INTO admin.LANGUAGE(name)
         VALUES (#{name})
     </insert>
 
+    <update id="removeLanguage">
+        UPDATE ADMIN.LANGUAGE
+        SET
+            REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateLanguage">
+        UPDATE ADMIN.LANGUAGE
+        SET
+            NAME = #{name}
+        WHERE id = #{id}
+    </update>
 </mapper>

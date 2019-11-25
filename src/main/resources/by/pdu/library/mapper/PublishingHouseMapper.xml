@@ -30,9 +30,9 @@
         WHERE id = #{id}
     </update>
 
-    <update id="removePublishingHouse">
+    <delete id="removePublishingHouse">
         UPDATE ADMIN.Publishing_House
         SET REMOVED_DATE = (SELECT sysdate FROM DUAL)
         WHERE id = #{id}
-    </update>
+    </delete>
 </mapper>

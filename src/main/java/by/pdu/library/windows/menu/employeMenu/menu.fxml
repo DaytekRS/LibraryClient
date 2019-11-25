@@ -64,15 +64,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="759.0">
                      <children>
-                        <TableView layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
+                        <TableView fx:id="languageTable" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
                            <columns>
                               <TableColumn prefWidth="55.0" text="ID" />
                               <TableColumn prefWidth="614.0" text="Название" />
                            </columns>
                         </TableView>
-                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
-                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
-                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
+                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" onAction="#addLanguage" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
+                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" onAction="#removeLanguage" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
+                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" onAction="#updateLanguage" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
                      </children></AnchorPane>
               </content>
             </Tab>
