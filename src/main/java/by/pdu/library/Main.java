@@ -21,6 +21,7 @@ public class Main extends Application {
         ctx.inject(LoadFXML.class, "loader", loader);
         loader.load("windows/authorization/authorization.fxml", "Авторизация", primaryStage, 300, 275);
         primaryStage.getIcons().add(new Image("img/icon.png"));
+        primaryStage.centerOnScreen();
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(we -> {

@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class LoadFXML {
@@ -24,19 +25,43 @@ public class LoadFXML {
     }
 
     public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height) {
-        primaryStage.initOwner(owner);
-        primaryStage.initModality(Modality.APPLICATION_MODAL);
-        return load(fxml, title, primaryStage, width, height);
+        return loadModal(fxml, title, primaryStage, owner, width, height, false);
     }
 
     public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height, boolean resizable) {
         primaryStage.initOwner(owner);
         primaryStage.initModality(Modality.APPLICATION_MODAL);
-        return load(fxml, title, primaryStage, width, height, resizable);
+        Window window = load(fxml, title, primaryStage, width, height, resizable);
+        primaryStage.centerOnScreen();
+        return window;
     }
 
     public Window load(String fxml, String title, Stage primaryStage, int width, int height) {
         return load(fxml, title, primaryStage, width, height, false);
+    }
+
+    private void centering(Stage primaryStage, int width, int height) {
+        int oldWidth, oldHeight;
+        oldHeight = (int) primaryStage.getHeight();
+        oldWidth = (int) primaryStage.getWidth();
+        int oldX, oldY;
+        oldX = (int) primaryStage.getX();
+        oldY = (int) primaryStage.getY();
+
+        int centerX = (oldWidth / 2 + oldX);
+        int centerY = (oldHeight / 2 + oldY);
+
+        int newX = centerX - width / 2;
+        int newY = centerY - height / 2;
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        if (newX < 10) newX = 10;
+        if (newX + width > dim.width) newX = dim.width - width;
+        if (newY < 10) newY = 10;
+        if (newY + height > dim.height - 75) newY = dim.height - height - 75;
+
+        primaryStage.setX(newX);
+        primaryStage.setY(newY);
     }
 
     public Window load(String fxml, String title, Stage primaryStage, int width, int height, boolean resizable) {
@@ -46,6 +71,7 @@ public class LoadFXML {
             Window controller = loader.getController();
             controller.setApplicationContext(ctx);
             controller.setStage(primaryStage);
+            centering(primaryStage, width, height);
             primaryStage.setTitle(title);
             primaryStage.setScene(new Scene(root, width, height));
             primaryStage.getIcons().removeAll();
