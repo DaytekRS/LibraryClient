@@ -40,7 +40,7 @@
                         <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
                         <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
                         <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
-                        <TreeView layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0" />
+                        <TreeView fx:id="catalogTree" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -80,15 +80,15 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="759.0">
                      <children>
-                        <TableView layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
+                        <TableView fx:id="authorTable" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
                            <columns>
                               <TableColumn prefWidth="55.0" text="ID" />
                               <TableColumn prefWidth="614.0" text="ФИО" />
                            </columns>
                         </TableView>
-                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
-                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
-                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
+                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" onAction="#addAuthor" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
+                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" onAction="#removeAuthor" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
+                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" onAction="#updateAuthor" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
                      </children></AnchorPane>
             </content>
           </Tab>

@@ -54,6 +54,12 @@ public class AuthorizationController extends Window {
 
         PublishingHouseMapper publishingHouseMapper = session.getMapper(PublishingHouseMapper.class);
         ctx.inject(PublishingHouseMapper.class, "publishingHouseMapper", publishingHouseMapper);
+
+        AuthorMapper authorMapper = session.getMapper(AuthorMapper.class);
+        ctx.inject(AuthorMapper.class, "authorMapper", authorMapper);
+
+        CatalogMapper catalogMapper = session.getMapper(CatalogMapper.class);
+        ctx.inject(CatalogMapper.class, "catalogMapper", catalogMapper);
     }
 
     @FXML

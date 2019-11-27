@@ -30,6 +30,8 @@
         <mapper class="by.pdu.library.mapper.GradeMapper"/>
         <mapper class="by.pdu.library.mapper.GroupMapper"/>
         <mapper class="by.pdu.library.mapper.PublishingHouseMapper"/>
+        <mapper class="by.pdu.library.mapper.AuthorMapper"/>
+        <mapper class="by.pdu.library.mapper.CatalogMapper"/>
     </mappers>
 
 

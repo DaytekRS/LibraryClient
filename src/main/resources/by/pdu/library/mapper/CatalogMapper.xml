@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="by.pdu.library.mapper.CatalogMapper">
+    <resultMap id="catalogRootResultMap" type="by.pdu.library.domain.Catalog">
+        <id column="root_catalog_id" property="id"/>
+        <result column="root_catalog_name" property="name"/>
+    </resultMap>
+
+    <resultMap id="catalogResultMap" type="by.pdu.library.domain.Catalog">
+        <id column="catalog_id" property="id"/>
+        <result column="catalog_name" property="name"/>
+        <collection property="root" javaType="by.pdu.library.domain.Catalog"
+                    resultMap="by.pdu.library.mapper.CatalogMapper.catalogRootResultMap"/>
+    </resultMap>
+
+    <select id="getRootCatalog" resultMap="catalogResultMap">
+        SELECT
+            c.id AS "catalog_id",
+            c.name AS "catalog_name"
+        FROM
+            ADMIN.CATALOG c
+        WHERE
+            c.REMOVED_DATE IS NULL
+            AND c.root_id IS NULL
+    </select>
+
+    <select id="getCatalogByRoot" resultMap="catalogResultMap">
+        SELECT
+            c.id AS "catalog_id",
+            c.name AS "catalog_name",
+            r.id AS "root_catalog_id",
+            r.name AS "root_catalog_name"
+        FROM
+            ADMIN.CATALOG c
+            LEFT JOIN ADMIN.CATALOG r ON c.root_id = r.id
+        WHERE
+            c.REMOVED_DATE IS NULL
+            AND r.id = #{id}
+            AND r.REMOVED_DATE is NULL
+    </select>
+
+</mapper>

@@ -3,14 +3,20 @@ package by.pdu.library.windows.menu.employeMenu;
 import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.ApplicationContextImpl;
 import by.pdu.library.windows.Window;
+import by.pdu.library.windows.menu.employeMenu.author.AuthorController;
+import by.pdu.library.windows.menu.employeMenu.catalog.CatalogController;
 import by.pdu.library.windows.menu.employeMenu.language.LanguageController;
 import by.pdu.library.windows.menu.employeMenu.publishingHouse.PublishingHouseController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeView;
 
 public class MenuController extends Window {
     @FXML
-    TableView publishingHouseTable, languageTable;
+    private TableView publishingHouseTable, languageTable, authorTable;
+
+    @FXML
+    private TreeView catalogTree;
 
     private ApplicationContextImpl ctxController;
 
@@ -23,6 +29,12 @@ public class MenuController extends Window {
 
         LanguageController language = new LanguageController(languageTable);
         ctxController.inject(LanguageController.class, "language", language);
+
+        AuthorController author = new AuthorController(authorTable);
+        ctxController.inject(AuthorController.class, "author", author);
+
+        CatalogController catalog = new CatalogController(catalogTree);
+        ctxController.inject(CatalogController.class, "catalog", catalog);
     }
 
     @FXML
@@ -53,6 +65,21 @@ public class MenuController extends Window {
     @FXML
     private void updateLanguage() {
         ctxController.getBean("language", LanguageController.class).update();
+    }
+
+    @FXML
+    private void addAuthor() {
+        ctxController.getBean("author", AuthorController.class).add();
+    }
+
+    @FXML
+    private void removeAuthor() {
+        ctxController.getBean("author", AuthorController.class).remove();
+    }
+
+    @FXML
+    private void updateAuthor() {
+        ctxController.getBean("author", AuthorController.class).update();
     }
 
 

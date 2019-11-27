@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="by.pdu.library.mapper.AuthorMapper">
+
+    <resultMap id="authorResultMap" type="by.pdu.library.domain.Author">
+        <id column="author_id" property="id"/>
+        <result column="author_name" property="name"/>
+    </resultMap>
+
+    <select id="getAuthor" resultMap="authorResultMap">
+        SELECT
+            id as "author_id",
+            name as "author_name"
+        FROM
+            admin.Authors
+        WHERE
+            REMOVED_DATE IS NULL
+    </select>
+
+    <insert id="insertAuthor" >
+        INSERT INTO admin.Authors(name)
+        VALUES (#{name})
+    </insert>
+
+    <update id="removeAuthor">
+        UPDATE ADMIN.Authors
+        SET
+            REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateAuthor">
+        UPDATE ADMIN.Authors
+        SET
+            NAME = #{name}
+        WHERE id = #{id}
+    </update>
+</mapper>
