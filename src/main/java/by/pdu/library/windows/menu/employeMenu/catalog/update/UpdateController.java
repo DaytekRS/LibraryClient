@@ -99,6 +99,19 @@ public class UpdateController extends SupportWindow {
         }
     }
 
+    private TreeItem<Catalog> findRootItem(TreeItem<Catalog> root, Catalog catalog) {
+        if (catalog.getRoot() == null) return null;
+        if (root.getValue().getId().equals(catalog.getRoot().getId())) {
+            return root;
+        } else {
+            for (TreeItem<Catalog> item : root.getChildren()) {
+                TreeItem<Catalog> find = findRootItem(item, catalog);
+                if (find != null) return find;
+            }
+        }
+        return null;
+    }
+
     public void setUpdateCatalog(Catalog updateCatalog) {
         this.updateCatalog = updateCatalog;
         idField.setText(updateCatalog.getId());
@@ -107,6 +120,20 @@ public class UpdateController extends SupportWindow {
         if (updateCatalog.getRoot() != null) {
             selectItem(treeView.getRoot());
         }
+
+
+        TreeItem<Catalog> root = null;
+        if (updateCatalog.getRoot() == null) root = treeView.getRoot();
+        else root = findRootItem(treeView.getRoot(), updateCatalog);
+        System.out.println(root);
+        TreeItem<Catalog> remove = null;
+        if (root != null) {
+            for (TreeItem<Catalog> find : root.getChildren()) {
+                if (find.getValue().getId().equals(updateCatalog.getId())) remove = find;
+            }
+            root.getChildren().remove(remove);
+        }
+        treeView.refresh();
     }
 
     protected void close(Catalog catalog) {

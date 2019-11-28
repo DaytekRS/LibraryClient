@@ -3,7 +3,6 @@ package by.pdu.library.windows.menu.employeMenu.catalog.add;
 import by.pdu.library.domain.Catalog;
 import by.pdu.library.mapper.CatalogMapper;
 import by.pdu.library.utils.AlertWindow;
-import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.StringSupport;
 import by.pdu.library.windows.SupportWindow;
 import by.pdu.library.windows.Window;
@@ -23,6 +22,8 @@ public class AddController extends SupportWindow {
     private TreeView<Catalog> treeView;
 
     private Catalog rootCatalog;
+
+    private Catalog addCatalog;
 
     @FXML
     public void initialize() {
@@ -69,26 +70,16 @@ public class AddController extends SupportWindow {
         }
     }
 
-
-    @Override
-    public void setApplicationContext(ApplicationContext ctx) {
-        super.setApplicationContext(ctx);
-        CatalogMapper mapper = ctx.getBean("catalogMapper", CatalogMapper.class);
-        rootCatalog = new Catalog();
-        rootCatalog.setId("0");
-        rootCatalog.setName("ББК");
-        TreeItem<Catalog> root = new TreeItem<>(rootCatalog);
-        treeView.setRoot(root);
-        for (Catalog catalog : mapper.getRootCatalog()) {
-            TreeItem<Catalog> items = new TreeItem<>(catalog);
-            root.getChildren().add(items);
-            setTree(items, mapper);
-        }
-        treeView.refresh();
-    }
-
     protected void close(Catalog catalog) {
         super.close(Window.CLICK_ADD);
         stage.setUserData(catalog);
+    }
+
+    public void setTreeView(TreeView<Catalog> treeView) {
+        this.treeView.setRoot(treeView.getRoot());
+        this.treeView.setSelectionModel(treeView.getSelectionModel());
+        if (!treeView.getSelectionModel().getSelectedItem().getValue().getId().equals("0"))
+            idField.setText(treeView.getSelectionModel().getSelectedItem().getValue().getId());
+        treeView.refresh();
     }
 }
