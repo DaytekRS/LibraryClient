@@ -27,6 +27,21 @@
             AND c.root_id IS NULL
     </select>
 
+    <select id="getCatalogById" resultMap="catalogResultMap">
+        SELECT
+            c.id AS "catalog_id",
+            c.name AS "catalog_name",
+            r.id AS "root_catalog_id",
+            r.name AS "root_catalog_name"
+        FROM
+            ADMIN.CATALOG c
+            LEFT JOIN ADMIN.CATALOG r ON c.root_id = r.id
+        WHERE
+            c.REMOVED_DATE IS NULL
+            AND c.id = #{id}
+            AND r.REMOVED_DATE is NULL
+    </select>
+
     <select id="getCatalogByRoot" resultMap="catalogResultMap">
         SELECT
             c.id AS "catalog_id",
@@ -41,5 +56,42 @@
             AND r.id = #{id}
             AND r.REMOVED_DATE is NULL
     </select>
+
+    <delete id="removeCatalog">
+        DELETE FROM ADMIN.CATALOG
+        WHERE
+            id = #{id}
+    </delete>
+
+    <insert id="insertRoot">
+        INSERT INTO ADMIN.CATALOG(ID,NAME)
+        VALUES(#{id},#{catalog})
+    </insert>
+
+    <insert id="insertCatalog">
+        INSERT INTO ADMIN.CATALOG(ID,NAME,ROOT_ID)
+        VALUES(#{id},#{catalog},#{rootId})
+    </insert>
+
+    <update id="updateRoot">
+        UPDATE ADMIN.CATALOG
+        SET
+            ID = #{id},
+            NAME = #{catalog},
+            ROOT_ID = NULL
+        WHERE
+            ID = #{oldId}
+    </update>
+
+    <update id="updateCatalog">
+        UPDATE ADMIN.CATALOG
+        SET
+            ID = #{id},
+            NAME = #{catalog},
+            ROOT_ID = #{rootId}
+        WHERE
+            ID = #{oldId}
+    </update>
+
 
 </mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.employeMenu.catalog.add.AddController">
+   <children>
+      <TreeView fx:id="treeView" layoutX="32.0" layoutY="89.0" prefHeight="256.0" prefWidth="536.0" />
+      <Label layoutX="32.0" layoutY="72.0" text="Выберите корень" />
+      <Button layoutX="516.0" layoutY="361.0" mnemonicParsing="false" onAction="#add" text="Добавить" />
+      <TextField fx:id="catalogField" layoutX="208.0" layoutY="26.0" prefHeight="25.0" prefWidth="360.0" promptText="Название каталога" />
+      <TextField fx:id="idField" layoutX="32.0" layoutY="26.0" prefHeight="25.0" prefWidth="158.0" promptText="Идентификатор" />
+   </children>
+</AnchorPane>

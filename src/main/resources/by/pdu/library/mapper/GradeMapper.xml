@@ -33,7 +33,7 @@
 
     <update id="updateGrade">
         UPDATE ADMIN.GRADE
-        SET NAME = #{name}
+            SET NAME = #{name}
         WHERE id = #{id}
     </update>
 

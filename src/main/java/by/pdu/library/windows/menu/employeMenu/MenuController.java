@@ -82,6 +82,20 @@ public class MenuController extends Window {
         ctxController.getBean("author", AuthorController.class).update();
     }
 
+    @FXML
+    private void addCatalog() {
+        ctxController.getBean("catalog", CatalogController.class).add();
+    }
+
+    @FXML
+    private void removeCatalog() {
+        ctxController.getBean("catalog", CatalogController.class).remove();
+    }
+
+    @FXML
+    private void updateCatalog() {
+        ctxController.getBean("catalog", CatalogController.class).update();
+    }
 
     @Override
     public void setApplicationContext(ApplicationContext ctx) {
