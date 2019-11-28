@@ -32,7 +32,7 @@
         <mapper class="by.pdu.library.mapper.PublishingHouseMapper"/>
         <mapper class="by.pdu.library.mapper.AuthorMapper"/>
         <mapper class="by.pdu.library.mapper.CatalogMapper"/>
+        <mapper class="by.pdu.library.mapper.UserMapper"/>
+        <mapper class="by.pdu.library.mapper.CardMapper"/>
     </mappers>
-
-
 </configuration>

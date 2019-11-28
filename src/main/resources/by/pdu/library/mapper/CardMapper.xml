@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.pdu.library.mapper.CardMapper">
+
+    <resultMap id="studentResultMap" type="by.pdu.library.domain.StudentCard">
+        <id column="card_id" property="id"/>
+        <result column="card_fio" property="FIO"/>
+        <result column="card_birthday" property="birthday"/>
+        <result column="card_issueDate" property="issueDate"/>
+        <result column="card_validDate" property="validDate"/>
+        <collection property="user" javaType="by.pdu.library.domain.User"
+                    resultMap="by.pdu.library.mapper.UserMapper.userResultMap"/>
+
+        <collection property="group" javaType="by.pdu.library.domain.Group"
+                    resultMap="by.pdu.library.mapper.GroupMapper.groupResultMap"/>
+    </resultMap>
+
+    <resultMap id="teacherResultMap" type="by.pdu.library.domain.TeacherCard">
+        <id column="card_id" property="id"/>
+        <result column="card_fio" property="FIO"/>
+        <result column="card_birthday" property="birthday"/>
+        <result column="card_issueDate" property="issueDate"/>
+        <result column="card_validDate" property="validDate"/>
+        <collection property="user" javaType="by.pdu.library.domain.User"
+                    resultMap="by.pdu.library.mapper.UserMapper.userResultMap"/>
+
+        <collection property="department" javaType="by.pdu.library.domain.Department"
+                    resultMap="by.pdu.library.mapper.DepartmentMapper.departmentResultMap"/>
+
+        <collection property="grade" javaType="by.pdu.library.domain.Grade"
+                    resultMap="by.pdu.library.mapper.GradeMapper.gradeResultMap"/>
+    </resultMap>
+
+    <select id="getStudentCard" resultMap="by.pdu.library.mapper.CardMapper.studentResultMap">
+        SELECT
+            c.id as "card_id",
+            c.FIO as "card_fio",
+            c.birthday as "card_birthday",
+            c.issue_date as "card_issueDate",
+            c.valid_date as "card_validDate",
+            u.login as "user_login",
+            u.password as "user_password",
+            u.email as "user_email",
+            g.id AS "group_id",
+            g.name AS "group_name",
+            f.id AS "faculty_id",
+            f.name AS "faculty_name"
+        FROM
+            ADMIN.CARD c
+            INNER JOIN ADMIN.STUDENT s ON s.card_id = c.id
+            LEFT JOIN ADMIN.USERS u ON c.id = u.card_id
+            LEFT JOIN ADMIN.GROUPS g ON g.id = s.group_id
+            LEFT JOIN ADMIN.faculty f on g.faculty_id = f.id
+        WHERE
+            (
+                u.not_valid IS NULL  OR
+                (SELECT sysdate FROM DUAL) > u.not_valid
+            )AND
+            c.removed_date IS NULL
+    </select>
+
+    <select id="getTeacherCard" resultMap="by.pdu.library.mapper.CardMapper.teacherResultMap">
+        SELECT
+            c.id as "card_id",
+            c.FIO as "card_fio",
+            c.birthday as "card_birthday",
+            c.issue_date as "card_issueDate",
+            c.valid_date as "card_validDate",
+            u.login as "user_login",
+            u.password as "user_password",
+            u.email as "user_email",
+            g.id AS "grade_id",
+            g.name AS "grade_name",
+            d.id AS "department_id",
+            d.name AS "department_name",
+            f.id AS "faculty_id",
+            f.name AS "faculty_name"
+        FROM
+            ADMIN.CARD c
+            INNER JOIN ADMIN.TEACHER t ON t.card_id = c.id
+            INNER JOIN ADMIN.USERS u ON c.id = u.card_id
+            LEFT JOIN ADMIN.GRADE g ON g.id = t.grade_id
+            LEFT JOIN ADMIN.department d ON d.id = t.department_id
+            LEFT JOIN ADMIN.faculty f on d.faculty_id = f.id
+            WHERE
+            (
+                u.not_valid IS NULL  OR
+                (SELECT sysdate FROM DUAL) > u.not_valid
+            )AND
+            c.removed_date IS NULL
+    </select>
+</mapper>

@@ -11,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
-import java.util.ArrayList;
-
 
 public class AddController extends SupportWindow {
     @FXML
@@ -29,19 +27,6 @@ public class AddController extends SupportWindow {
     public void initialize() {
         idField.setFocusTraversable(false);
     }
-
-    private void setTree(TreeItem<Catalog> items, CatalogMapper mapper) {
-        ArrayList<Catalog> child = new ArrayList<>(mapper.getCatalogByRoot(items.getValue().getId()));
-        if (child.size() != 0) {
-            for (Catalog catalog : child) {
-                TreeItem<Catalog> treeChild = new TreeItem(catalog);
-                items.getChildren().add(treeChild);
-                setTree(treeChild, mapper);
-            }
-        }
-
-    }
-
 
     @FXML
     private void add() {
@@ -75,11 +60,16 @@ public class AddController extends SupportWindow {
         stage.setUserData(catalog);
     }
 
+    @FXML
+    private void selectItem() {
+        if (!treeView.getSelectionModel().getSelectedItem().getValue().getId().equals("0"))
+            idField.setText(treeView.getSelectionModel().getSelectedItem().getValue().getId());
+    }
+
     public void setTreeView(TreeView<Catalog> treeView) {
         this.treeView.setRoot(treeView.getRoot());
         this.treeView.setSelectionModel(treeView.getSelectionModel());
-        if (!treeView.getSelectionModel().getSelectedItem().getValue().getId().equals("0"))
-            idField.setText(treeView.getSelectionModel().getSelectedItem().getValue().getId());
+        selectItem();
         treeView.refresh();
     }
 }

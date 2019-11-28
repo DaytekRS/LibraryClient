@@ -1,6 +1,8 @@
 package by.pdu.library.windows.authorization;
 
 import by.pdu.library.domain.Employe;
+import by.pdu.library.domain.StudentCard;
+import by.pdu.library.domain.TeacherCard;
 import by.pdu.library.mapper.*;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.LoadFXML;
@@ -14,6 +16,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Properties;
 
 
@@ -60,6 +63,14 @@ public class AuthorizationController extends Window {
 
         CatalogMapper catalogMapper = session.getMapper(CatalogMapper.class);
         ctx.inject(CatalogMapper.class, "catalogMapper", catalogMapper);
+
+        CardMapper cardMapper = session.getMapper(CardMapper.class);
+        session.commit();
+        ctx.inject(CardMapper.class, "cardMapper", cardMapper);
+
+        System.out.println(cardMapper.getStudentCard());
+        System.out.println(cardMapper.getTeacherCard());
+
     }
 
     @FXML
