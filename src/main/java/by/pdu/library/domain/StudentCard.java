@@ -6,5 +6,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class StudentCard extends Card {
+    {
+        type = "Студент";
+    }
+
     private Group group;
 }

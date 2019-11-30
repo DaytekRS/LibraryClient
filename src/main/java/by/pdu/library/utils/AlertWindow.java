@@ -39,7 +39,7 @@ public class AlertWindow {
             return;
         }
 
-        if (message.contains("ORA-00001")) {
+        if (message.contains("ORA-00001") || message.contains("ORA-20000")) {
             AlertWindow.errorAlert("Одно из полей должно быть уникально.\nПожалуйста исправьте данные и попробуйте снова.");
             return;
         }

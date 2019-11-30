@@ -7,13 +7,14 @@ import by.pdu.library.windows.menu.employeMenu.author.AuthorController;
 import by.pdu.library.windows.menu.employeMenu.catalog.CatalogController;
 import by.pdu.library.windows.menu.employeMenu.language.LanguageController;
 import by.pdu.library.windows.menu.employeMenu.publishingHouse.PublishingHouseController;
+import by.pdu.library.windows.menu.employeMenu.users.UsersController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeView;
 
 public class MenuController extends Window {
     @FXML
-    private TableView publishingHouseTable, languageTable, authorTable;
+    private TableView publishingHouseTable, languageTable, authorTable, userTable;
 
     @FXML
     private TreeView catalogTree;
@@ -35,6 +36,9 @@ public class MenuController extends Window {
 
         CatalogController catalog = new CatalogController(catalogTree);
         ctxController.inject(CatalogController.class, "catalog", catalog);
+
+        UsersController users = new UsersController(userTable);
+        ctxController.inject(UsersController.class, "users", users);
     }
 
     @FXML

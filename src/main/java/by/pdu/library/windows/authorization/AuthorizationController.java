@@ -1,8 +1,6 @@
 package by.pdu.library.windows.authorization;
 
 import by.pdu.library.domain.Employe;
-import by.pdu.library.domain.StudentCard;
-import by.pdu.library.domain.TeacherCard;
 import by.pdu.library.mapper.*;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.LoadFXML;
@@ -16,7 +14,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Properties;
 
 
@@ -65,12 +62,7 @@ public class AuthorizationController extends Window {
         ctx.inject(CatalogMapper.class, "catalogMapper", catalogMapper);
 
         CardMapper cardMapper = session.getMapper(CardMapper.class);
-        session.commit();
         ctx.inject(CardMapper.class, "cardMapper", cardMapper);
-
-        System.out.println(cardMapper.getStudentCard());
-        System.out.println(cardMapper.getTeacherCard());
-
     }
 
     @FXML
@@ -98,7 +90,7 @@ public class AuthorizationController extends Window {
             if (role == null) {
                 loader.load("windows/menu/adminMenu/adminMenu.fxml", "Меню", stage, 360, 410);
             } else if (role.equals("EMPLOYE_LIBRARY")) {
-                loader.load("windows/menu/employeMenu/menu.fxml", "Меню", stage, 800, 460);
+                loader.load("windows/menu/employeMenu/menu.fxml", "Меню", stage, 800, 475);
             }
 
         } catch (IOException e) {

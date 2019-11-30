@@ -96,7 +96,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="759.0">
                      <children>
-                        <TableView layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
+                        <TableView fx:id="userTable" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
                            <columns>
                               <TableColumn prefWidth="55.0" text="ID" />
                             <TableColumn prefWidth="293.0" text="ФИО" />

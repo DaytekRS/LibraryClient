@@ -33,6 +33,34 @@
                     resultMap="by.pdu.library.mapper.GradeMapper.gradeResultMap"/>
     </resultMap>
 
+    <resultMap id="graduateResultMap" type="by.pdu.library.domain.GraduateStudentCard">
+        <id column="card_id" property="id"/>
+        <result column="card_fio" property="FIO"/>
+        <result column="card_birthday" property="birthday"/>
+        <result column="card_issueDate" property="issueDate"/>
+        <result column="card_validDate" property="validDate"/>
+        <result column="scientific_topic" property="scientificTopic"/>
+        <collection property="user" javaType="by.pdu.library.domain.User"
+                    resultMap="by.pdu.library.mapper.UserMapper.userResultMap"/>
+
+
+    </resultMap>
+
+    <resultMap id="otherResultMap" type="by.pdu.library.domain.OtherCard">
+        <id column="card_id" property="id"/>
+        <result column="card_fio" property="FIO"/>
+        <result column="card_birthday" property="birthday"/>
+        <result column="card_issueDate" property="issueDate"/>
+        <result column="card_validDate" property="validDate"/>
+        <result column="other_registration" property="registration"/>
+        <result column="other_passport" property="passport"/>
+        <result column="other_work" property="work"/>
+        <collection property="user" javaType="by.pdu.library.domain.User"
+                    resultMap="by.pdu.library.mapper.UserMapper.userResultMap"/>
+
+
+    </resultMap>
+
     <select id="getStudentCard" resultMap="by.pdu.library.mapper.CardMapper.studentResultMap">
         SELECT
             c.id as "card_id",
@@ -85,6 +113,54 @@
             LEFT JOIN ADMIN.department d ON d.id = t.department_id
             LEFT JOIN ADMIN.faculty f on d.faculty_id = f.id
             WHERE
+            (
+                u.not_valid IS NULL  OR
+                (SELECT sysdate FROM DUAL) > u.not_valid
+            )AND
+            c.removed_date IS NULL
+    </select>
+
+    <select id="getGraduateStudentCard" resultMap="by.pdu.library.mapper.CardMapper.graduateResultMap">
+        SELECT
+            c.id as "card_id",
+            c.FIO as "card_fio",
+            c.birthday as "card_birthday",
+            c.issue_date as "card_issueDate",
+            c.valid_date as "card_validDate",
+            u.login as "user_login",
+            u.password as "user_password",
+            u.email as "user_email",
+            g.scientific_topic as "scientific_topic"
+        FROM
+            ADMIN.CARD c
+            INNER JOIN ADMIN.GRADUATE_STUDENT g ON g.card_id = c.id
+            INNER JOIN ADMIN.USERS u ON c.id = u.card_id
+        WHERE
+            (
+                u.not_valid IS NULL  OR
+                (SELECT sysdate FROM DUAL) > u.not_valid
+            )AND
+            c.removed_date IS NULL
+    </select>
+
+    <select id="getOtherCard" resultMap="by.pdu.library.mapper.CardMapper.otherResultMap">
+        SELECT
+            c.id as "card_id",
+            c.FIO as "card_fio",
+            c.birthday as "card_birthday",
+            c.issue_date as "card_issueDate",
+            c.valid_date as "card_validDate",
+            u.login as "user_login",
+            u.password as "user_password",
+            u.email as "user_email",
+            o.passport as "other_passport",
+            o.registration as "other_registration",
+            o.work as "other_work"
+        FROM
+            ADMIN.CARD c
+            INNER JOIN ADMIN.OTHER o ON o.card_id = c.id
+            INNER JOIN ADMIN.USERS u ON c.id = u.card_id
+        WHERE
             (
                 u.not_valid IS NULL  OR
                 (SELECT sysdate FROM DUAL) > u.not_valid
