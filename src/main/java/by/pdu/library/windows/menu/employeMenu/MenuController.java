@@ -106,6 +106,16 @@ public class MenuController extends Window {
         ctxController.getBean("users", UsersController.class).add();
     }
 
+    @FXML
+    private void removeUser() {
+        ctxController.getBean("users", UsersController.class).remove();
+    }
+
+    @FXML
+    private void updateUser() {
+        ctxController.getBean("users", UsersController.class).update();
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext ctx) {
         super.setApplicationContext(ctx);

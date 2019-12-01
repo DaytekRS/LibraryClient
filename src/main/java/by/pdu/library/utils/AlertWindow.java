@@ -44,6 +44,16 @@ public class AlertWindow {
             return;
         }
 
+        if (message.contains("ORA-20002")) {
+            String [] str = message.split("\n");
+            String oraMes="";
+            for (String temp:str){
+                if (temp.contains("ORA-20002")) oraMes=temp.substring(45);
+            }
+            AlertWindow.errorAlert(oraMes);
+            return;
+        }
+
         if (message.contains("ORA-20003")) {
             AlertWindow.errorAlert("Дата рождения не может быть больше текущего дня.");
             return;

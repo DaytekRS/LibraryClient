@@ -2,8 +2,11 @@ package by.pdu.library.windows.menu.employeMenu.users;
 
 import by.pdu.library.domain.Card;
 import by.pdu.library.mapper.CardMapper;
+import by.pdu.library.utils.AlertWindow;
+import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.Window;
 import by.pdu.library.windows.menu.employeMenu.TabController;
+import by.pdu.library.windows.menu.employeMenu.users.update.UpdateController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -39,7 +42,27 @@ public class UsersController extends TabController {
 
     @Override
     public void update() {
+        Object obj = tableView.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.errorAlert("Нет выбранного элемента");
+            return;
+        }
+        Card card = (Card) obj;
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        Stage stage = new Stage();
 
+        UpdateController controller = (UpdateController) loader.loadModal("windows/menu/employeMenu/users/update/update.fxml",
+                "Редактировать пользователя",
+                stage,
+                this.stage,
+                440,
+                310);
+
+        controller.setCard(card);
+        stage.showAndWait();
+        Object data = stage.getUserData();
+        if (data != null && (Integer) data == Window.CLICK_EDIT)
+            updateView();
     }
 
     @Override
@@ -51,6 +74,16 @@ public class UsersController extends TabController {
 
     @Override
     public void remove() {
+        Object obj = tableView.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.errorAlert("Нет выбранного элемента");
+            return;
+        }
 
+        Card card = (Card) obj;
+        CardMapper mapper = ctx.getBean("cardMapper", CardMapper.class);
+        mapper.removeCard(card.getId());
+        commit();
+        updateView();
     }
 }

@@ -4,16 +4,10 @@ import by.pdu.library.domain.Department;
 import by.pdu.library.domain.Grade;
 import by.pdu.library.domain.Group;
 import by.pdu.library.mapper.CardMapper;
-import by.pdu.library.mapper.DepartmentMapper;
-import by.pdu.library.mapper.GradeMapper;
-import by.pdu.library.mapper.GroupMapper;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.PasswordGen;
-import by.pdu.library.utils.support.ApplicationContext;
-import by.pdu.library.windows.SupportWindow;
 import by.pdu.library.windows.Window;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import by.pdu.library.windows.menu.employeMenu.users.UserModalWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -23,7 +17,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class AddController extends SupportWindow {
+public class AddController extends UserModalWindow {
     @FXML
     private ComboBox groupBox, departmentBox, gradeBox;
 
@@ -112,19 +106,5 @@ public class AddController extends SupportWindow {
             AlertWindow.checkException(ex.getMessage());
             ex.printStackTrace();
         }
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ctx) {
-        super.setApplicationContext(ctx);
-        GroupMapper groupMapper = ctx.getBean("groupMapper", GroupMapper.class);
-        GradeMapper gradeMapper = ctx.getBean("gradeMapper", GradeMapper.class);
-        DepartmentMapper departmentMapper = ctx.getBean("departmentMapper", DepartmentMapper.class);
-        ObservableList<Group> groups = FXCollections.observableArrayList(groupMapper.getGroup());
-        ObservableList<Grade> grades = FXCollections.observableArrayList(gradeMapper.getGrade());
-        ObservableList<Department> departments = FXCollections.observableArrayList(departmentMapper.getDepartment());
-        groupBox.setItems(groups);
-        gradeBox.setItems(grades);
-        departmentBox.setItems(departments);
     }
 }

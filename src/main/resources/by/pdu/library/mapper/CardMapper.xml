@@ -200,4 +200,37 @@
     <select id="checkPassword" resultType="java.lang.Integer">
         SELECT ADMIN.PASSWORD_CHECK(#{password}) FROM DUAL;
     </select>
+
+    <update id="removeCard">
+        UPDATE ADMIN.CARD
+        SET
+            REMOVED_DATE = (SELECT sysdate from dual)
+        WHERE
+            id =#{id}
+    </update>
+
+    <insert id="updateStudentCard" statementType = "CALLABLE">
+        {call ADMIN.UPDATE_STUDENT(#{id, jdbcType =  INTEGER, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{groupId, jdbcType =  INTEGER, mode = IN})}
+    </insert>
+
+    <insert id="updateTeacherCard" statementType = "CALLABLE">
+        {call ADMIN.UPDATE_TEACHER(#{id, jdbcType =  INTEGER, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{departmentId, jdbcType =  INTEGER, mode = IN},#{gradeId, jdbcType =  INTEGER, mode = IN})}
+    </insert>
+
+    <insert id="updateGraduateStudent" statementType = "CALLABLE">
+        {call ADMIN.UPDATE_GRADUATE_STUDENT(#{id, jdbcType =  INTEGER, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{scientificTopic, jdbcType =  VARCHAR, mode = IN})}
+    </insert>
+
+    <insert id="updateOther" statementType = "CALLABLE">
+        {call ADMIN.UPDATE_OTHER_USER(#{id, jdbcType =  INTEGER, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{registration, jdbcType =  VARCHAR, mode = IN},#{work, jdbcType =  VARCHAR, mode = IN},
+        #{passport, jdbcType =  VARCHAR, mode = IN})}
+    </insert>
 </mapper>
