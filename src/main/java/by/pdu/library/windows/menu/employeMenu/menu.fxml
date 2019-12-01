@@ -165,6 +165,22 @@
                      </children></AnchorPane>
               </content>
             </Tab>
+            <Tab text="Статьи">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="759.0">
+                     <children>
+                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" onAction="#addArticle" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
+                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" onAction="#removeArticle" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
+                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" onAction="#updateArticle" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
+                        <TableView fx:id="articleTable" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
+                          <columns>
+                            <TableColumn prefWidth="350.0" text="Название" />
+                            <TableColumn prefWidth="319.0" text="Каталог" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

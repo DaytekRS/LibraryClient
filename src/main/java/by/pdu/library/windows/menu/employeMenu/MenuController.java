@@ -3,6 +3,7 @@ package by.pdu.library.windows.menu.employeMenu;
 import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.ApplicationContextImpl;
 import by.pdu.library.windows.Window;
+import by.pdu.library.windows.menu.employeMenu.article.ArticleController;
 import by.pdu.library.windows.menu.employeMenu.author.AuthorController;
 import by.pdu.library.windows.menu.employeMenu.catalog.CatalogController;
 import by.pdu.library.windows.menu.employeMenu.language.LanguageController;
@@ -14,7 +15,7 @@ import javafx.scene.control.TreeView;
 
 public class MenuController extends Window {
     @FXML
-    private TableView publishingHouseTable, languageTable, authorTable, userTable;
+    private TableView publishingHouseTable, languageTable, authorTable, userTable, articleTable;
 
     @FXML
     private TreeView catalogTree;
@@ -39,6 +40,9 @@ public class MenuController extends Window {
 
         UsersController users = new UsersController(userTable);
         ctxController.inject(UsersController.class, "users", users);
+
+        ArticleController article = new ArticleController(articleTable);
+        ctxController.inject(ArticleController.class, "article", article);
     }
 
     @FXML
@@ -114,6 +118,21 @@ public class MenuController extends Window {
     @FXML
     private void updateUser() {
         ctxController.getBean("users", UsersController.class).update();
+    }
+
+    @FXML
+    private void addArticle() {
+        ctxController.getBean("article", ArticleController.class).add();
+    }
+
+    @FXML
+    private void removeArticle() {
+        ctxController.getBean("article", ArticleController.class).remove();
+    }
+
+    @FXML
+    private void updateArticle() {
+        ctxController.getBean("article", ArticleController.class).update();
     }
 
     @Override

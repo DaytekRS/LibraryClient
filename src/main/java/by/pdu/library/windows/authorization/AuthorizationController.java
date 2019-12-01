@@ -63,6 +63,9 @@ public class AuthorizationController extends Window {
 
         CardMapper cardMapper = session.getMapper(CardMapper.class);
         ctx.inject(CardMapper.class, "cardMapper", cardMapper);
+
+        ArticleMapper articleMapper = session.getMapper(ArticleMapper.class);
+        ctx.inject(ArticleMapper.class, "articleMapper", articleMapper);
     }
 
     @FXML

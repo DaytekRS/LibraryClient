@@ -29,16 +29,6 @@ public class CatalogController extends TabController {
 
     }
 
-    /*private void selectItem(TreeItem<Catalog> items, Catalog catalog) {
-        if (items.getValue().getId().equals(catalog.getId())) {
-            treeView.getSelectionModel().select(items);
-        } else {
-            for (TreeItem<Catalog> item : items.getChildren()) {
-                selectItem(item,catalog);
-            }
-        }
-    }*/
-
     private TreeItem<Catalog> findRootItem(TreeItem<Catalog> root, Catalog catalog) {
         if (catalog.getRoot() == null) return null;
         if (root.getValue().getId().equals(catalog.getRoot().getId())) {
