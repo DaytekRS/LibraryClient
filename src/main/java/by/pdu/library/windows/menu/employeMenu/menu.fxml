@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -18,18 +19,21 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="445.0" prefWidth="760.0">
                      <children>
-                        <TableView layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
+                        <TreeTableView fx:id="bookTree" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
                            <columns>
-                              <TableColumn prefWidth="220.0" text="Название" />
-                              <TableColumn prefWidth="175.0" text="Издательство" />
-                              <TableColumn prefWidth="105.0" text="Язык" />
-                              <TableColumn prefWidth="70.0" text="Год" />
-                              <TableColumn prefWidth="100.0" text="Каталог" />
+                              <TreeTableColumn prefWidth="269.0" text="Название" />
+                              <TreeTableColumn prefWidth="110.0" text="Язык" />
+                              <TreeTableColumn prefWidth="179.0" text="Каталог" />
+                              <TreeTableColumn prefWidth="111.0" text="Номер" />
                            </columns>
-                        </TableView>
-                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
-                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
-                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
+                        </TreeTableView>
+                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBook" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
+                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" onAction="#removeBook" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
+                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" onAction="#updateBook" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
+                        <Button layoutX="690.0" layoutY="330.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
+                        <Button layoutX="690.0" layoutY="410.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
+                        <Button layoutX="690.0" layoutY="370.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Редактировать" />
+                        <Label layoutX="710.0" layoutY="301.0" text="Экземпляр" />
                      </children></AnchorPane>
               </content>
           </Tab>

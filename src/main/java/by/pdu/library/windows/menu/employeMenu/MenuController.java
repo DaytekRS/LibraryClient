@@ -5,17 +5,22 @@ import by.pdu.library.utils.support.ApplicationContextImpl;
 import by.pdu.library.windows.Window;
 import by.pdu.library.windows.menu.employeMenu.article.ArticleController;
 import by.pdu.library.windows.menu.employeMenu.author.AuthorController;
+import by.pdu.library.windows.menu.employeMenu.book.BookController;
 import by.pdu.library.windows.menu.employeMenu.catalog.CatalogController;
 import by.pdu.library.windows.menu.employeMenu.language.LanguageController;
 import by.pdu.library.windows.menu.employeMenu.publishingHouse.PublishingHouseController;
 import by.pdu.library.windows.menu.employeMenu.users.UsersController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.control.TreeView;
 
 public class MenuController extends Window {
     @FXML
     private TableView publishingHouseTable, languageTable, authorTable, userTable, articleTable;
+
+    @FXML
+    private TreeTableView bookTree;
 
     @FXML
     private TreeView catalogTree;
@@ -43,6 +48,9 @@ public class MenuController extends Window {
 
         ArticleController article = new ArticleController(articleTable);
         ctxController.inject(ArticleController.class, "article", article);
+
+        BookController book = new BookController(bookTree);
+        ctxController.inject(BookController.class, "book", book);
     }
 
     @FXML
@@ -133,6 +141,21 @@ public class MenuController extends Window {
     @FXML
     private void updateArticle() {
         ctxController.getBean("article", ArticleController.class).update();
+    }
+
+    @FXML
+    private void addBook() {
+        ctxController.getBean("book", BookController.class).add();
+    }
+
+    @FXML
+    private void updateBook() {
+        ctxController.getBean("book", BookController.class).update();
+    }
+
+    @FXML
+    private void removeBook() {
+        ctxController.getBean("book", BookController.class).remove();
     }
 
     @Override

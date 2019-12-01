@@ -3,6 +3,7 @@ package by.pdu.library.windows.menu.employeMenu.catalog.update;
 import by.pdu.library.domain.Catalog;
 import by.pdu.library.mapper.CatalogMapper;
 import by.pdu.library.utils.AlertWindow;
+import by.pdu.library.utils.CatalogSupport;
 import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.StringSupport;
 import by.pdu.library.windows.SupportWindow;
@@ -11,8 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-
-import java.util.ArrayList;
 
 
 public class UpdateController extends SupportWindow {
@@ -31,17 +30,6 @@ public class UpdateController extends SupportWindow {
         idField.setFocusTraversable(false);
     }
 
-    private void setTree(TreeItem<Catalog> items, CatalogMapper mapper) {
-        ArrayList<Catalog> child = new ArrayList<>(mapper.getCatalogByRoot(items.getValue().getId()));
-        if (child.size() != 0) {
-            for (Catalog catalog : child) {
-                TreeItem<Catalog> treeChild = new TreeItem(catalog);
-                items.getChildren().add(treeChild);
-                setTree(treeChild, mapper);
-            }
-        }
-
-    }
 
     @FXML
     private void update() {
@@ -75,18 +63,7 @@ public class UpdateController extends SupportWindow {
     @Override
     public void setApplicationContext(ApplicationContext ctx) {
         super.setApplicationContext(ctx);
-        CatalogMapper mapper = ctx.getBean("catalogMapper", CatalogMapper.class);
-        rootCatalog = new Catalog();
-        rootCatalog.setId("0");
-        rootCatalog.setName("ББК");
-        TreeItem<Catalog> root = new TreeItem<>(rootCatalog);
-        treeView.setRoot(root);
-        for (Catalog catalog : mapper.getRootCatalog()) {
-            TreeItem<Catalog> items = new TreeItem<>(catalog);
-            root.getChildren().add(items);
-            setTree(items, mapper);
-        }
-        treeView.refresh();
+        rootCatalog = CatalogSupport.initCatalog(ctx,treeView);
     }
 
     private void selectItem(TreeItem<Catalog> items) {
@@ -97,19 +74,6 @@ public class UpdateController extends SupportWindow {
                 selectItem(item);
             }
         }
-    }
-
-    private TreeItem<Catalog> findRootItem(TreeItem<Catalog> root, Catalog catalog) {
-        if (catalog.getRoot() == null) return null;
-        if (root.getValue().getId().equals(catalog.getRoot().getId())) {
-            return root;
-        } else {
-            for (TreeItem<Catalog> item : root.getChildren()) {
-                TreeItem<Catalog> find = findRootItem(item, catalog);
-                if (find != null) return find;
-            }
-        }
-        return null;
     }
 
     public void setUpdateCatalog(Catalog updateCatalog) {
@@ -124,7 +88,7 @@ public class UpdateController extends SupportWindow {
 
         TreeItem<Catalog> root = null;
         if (updateCatalog.getRoot() == null) root = treeView.getRoot();
-        else root = findRootItem(treeView.getRoot(), updateCatalog);
+        else root = CatalogSupport.findRootItem(treeView.getRoot(), updateCatalog);
         System.out.println(root);
         TreeItem<Catalog> remove = null;
         if (root != null) {

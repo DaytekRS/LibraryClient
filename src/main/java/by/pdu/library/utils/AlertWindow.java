@@ -89,6 +89,11 @@ public class AlertWindow {
             return;
         }
 
+        if (message.contains("ORA-02290")){
+            AlertWindow.errorAlert("Нарушена правильностей данных в поле или полях");
+            return;
+        }
+
         if (message.contains("ORA")) {
             errorAlert("Ошибка Oracle.\nГлупцы бегите быстрее к администратору\nи сообщите код ошибки\n" + message);
         } else {

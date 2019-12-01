@@ -1,5 +1,6 @@
 package by.pdu.library.windows.authorization;
 
+import by.pdu.library.domain.Book;
 import by.pdu.library.domain.Employe;
 import by.pdu.library.mapper.*;
 import by.pdu.library.utils.AlertWindow;
@@ -66,6 +67,12 @@ public class AuthorizationController extends Window {
 
         ArticleMapper articleMapper = session.getMapper(ArticleMapper.class);
         ctx.inject(ArticleMapper.class, "articleMapper", articleMapper);
+
+        BookMapper bookMapper = session.getMapper(BookMapper.class);
+        ctx.inject(BookMapper.class, "bookMapper", bookMapper);
+
+        System.out.println(bookMapper.getBook());
+        System.out.println(bookMapper.getPeriodic());
     }
 
     @FXML

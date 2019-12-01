@@ -38,4 +38,5 @@
             NAME = #{name}
         WHERE id = #{id}
     </update>
+
 </mapper>

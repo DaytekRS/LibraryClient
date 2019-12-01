@@ -3,6 +3,7 @@ package by.pdu.library.windows.menu.employeMenu.catalog;
 import by.pdu.library.domain.Catalog;
 import by.pdu.library.mapper.CatalogMapper;
 import by.pdu.library.utils.AlertWindow;
+import by.pdu.library.utils.CatalogSupport;
 import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.menu.employeMenu.TabController;
 import by.pdu.library.windows.menu.employeMenu.catalog.add.AddController;
@@ -11,36 +12,10 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 public class CatalogController extends TabController {
     private TreeView<Catalog> treeView;
     private Catalog rootCatalog;
 
-    private void setTree(TreeItem<Catalog> items, CatalogMapper mapper) {
-        ArrayList<Catalog> child = new ArrayList<>(mapper.getCatalogByRoot(items.getValue().getId()));
-        if (child.size() != 0) {
-            for (Catalog catalog : child) {
-                TreeItem<Catalog> treeChild = new TreeItem(catalog);
-                items.getChildren().add(treeChild);
-                setTree(treeChild, mapper);
-            }
-        }
-
-    }
-
-    private TreeItem<Catalog> findRootItem(TreeItem<Catalog> root, Catalog catalog) {
-        if (catalog.getRoot() == null) return null;
-        if (root.getValue().getId().equals(catalog.getRoot().getId())) {
-            return root;
-        } else {
-            for (TreeItem<Catalog> item : root.getChildren()) {
-                TreeItem<Catalog> find = findRootItem(item, catalog);
-                if (find != null) return find;
-            }
-        }
-        return null;
-    }
 
     public CatalogController(TreeView view) {
         super(view);
@@ -52,21 +27,13 @@ public class CatalogController extends TabController {
 
     @Override
     public void updateView() {
-        CatalogMapper mapper = ctx.getBean("catalogMapper", CatalogMapper.class);
-        TreeItem<Catalog> root = new TreeItem<>(rootCatalog);
-        treeView.setRoot(root);
-        for (Catalog catalog : mapper.getRootCatalog()) {
-            TreeItem<Catalog> items = new TreeItem<>(catalog);
-            root.getChildren().add(items);
-            setTree(items, mapper);
-        }
-        treeView.refresh();
+        CatalogSupport.refreshCatalog(ctx, treeView, rootCatalog);
     }
 
     private void selectItem(Catalog catalog) {
         TreeItem<Catalog> root = null;
         if (catalog.getRoot() == null) root = treeView.getRoot();
-        else root = findRootItem(treeView.getRoot(), catalog);
+        else root = CatalogSupport.findRootItem(treeView.getRoot(), catalog);
         if (root != null) {
             TreeItem<Catalog> item = new TreeItem<>(catalog);
             root.getChildren().add(item);
@@ -108,16 +75,10 @@ public class CatalogController extends TabController {
             CatalogMapper mapper = ctx.getBean("catalogMapper", CatalogMapper.class);
             mapper.removeCatalog(item.getId());
             commit();
-            TreeItem<Catalog> root = findRootItem(treeView.getRoot(), item);
+            TreeItem<Catalog> root = CatalogSupport.findRootItem(treeView.getRoot(), item);
             if (root == null) root = treeView.getRoot();
             root.getChildren().remove(treeView.getSelectionModel().getSelectedItem());
-            /*TreeItem<Catalog> remove = null;
-            for (TreeItem<Catalog> find : root.getChildren()) {
-                if (find.getValue() == item) remove = find;
-            }
-            root.getChildren().remove(remove);*/
             treeView.refresh();
-
         }
     }
 
@@ -145,7 +106,7 @@ public class CatalogController extends TabController {
             stage.showAndWait();
             Object data = stage.getUserData();
             if (data != null) {
-                TreeItem<Catalog> root = findRootItem(treeView.getRoot(), obj.getValue());
+                TreeItem<Catalog> root = CatalogSupport.findRootItem(treeView.getRoot(), obj.getValue());
                 if (root == null) root = treeView.getRoot();
                 root.getChildren().remove(obj);
                 selectItem((Catalog) data);

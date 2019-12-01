@@ -13,4 +13,6 @@ public interface AuthorMapper {
     void removeAuthor(Long id);
 
     void updateAuthor(@Param("id") Long id, @Param("name") String name);
+
+    List<Author> getAuthorBook(Long id);
 }

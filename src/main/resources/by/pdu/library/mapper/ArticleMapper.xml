@@ -8,6 +8,9 @@
         <result column="article_name" property="name"/>
         <collection property="catalog" javaType="by.pdu.library.domain.Catalog"
                     resultMap="by.pdu.library.mapper.CatalogMapper.catalogResultMap"/>
+
+        <collection property="authors" javaType="java.util.List"
+                    resultMap="by.pdu.library.mapper.AuthorMapper.authorResultMap"/>
     </resultMap>
 
     <select id="getArticle" resultMap="articleResultMap">
@@ -15,17 +18,31 @@
             a.ID as "article_id",
             a.NAME as "article_name",
             c.ID as "catalog_id",
-            c.NAME as "catalog_name"
+            c.NAME as "catalog_name",
+            aut.ID AS "author_id",
+            aut.NAME AS "author_name"
         FROM
             ADMIN.ARTICLE a
             LEFT JOIN ADMIN.CATALOG c ON a.catalog_id=c.id
+            LEFT JOIN ADMIN.AUTHORS_ARTICLE aa ON aa.ARTICLE_ID = a.ID
+            LEFT JOIN ADMIN.AUTHORS aut ON aa.AUTHOR_ID = aut.ID
         WHERE
             a.REMOVED_DATE IS NULL
     </select>
 
+    <insert id="insertAuthor">
+         INSERT INTO ADMIN.AUTHORS_ARTICLE(AUTHOR_ID,ARTICLE_ID)
+         VALUES (#{authorId},#{articleId})
+    </insert>
+
+    <delete id="removeAllAuthor">
+        DELETE FROM ADMIN.AUTHORS_ARTICLE
+        WHERE ARTICLE_ID =#{id}
+    </delete>
+
     <insert id="insertArticle">
-        INSERT INTO ADMIN.ARTICLE(NAME,CATALOG_ID)
-        VALUES (#{name},#{catalogId})
+          INSERT INTO ADMIN.ARTICLE(ID,NAME,CATALOG_ID)
+          VALUES (#{id},#{name},#{catalogId})
     </insert>
 
     <update id="removeArticle">
@@ -34,6 +51,10 @@
             REMOVED_DATE = (SELECT sysdate FROM DUAL)
         WHERE id = #{id}
     </update>
+
+    <select id="nextId" resultType="java.lang.Long">
+        SELECT ADMIN.ARTICLE_SEQ.NEXTVAL FROM DUAL
+    </select>
 
     <update id="updateArticle">
         UPDATE ADMIN.ARTICLE

@@ -4,10 +4,25 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="340.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.employeMenu.article.update.UpdateController">
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<AnchorPane prefHeight="575.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.employeMenu.article.update.UpdateController">
    <children>
       <TextField fx:id="nameField" layoutX="43.0" layoutY="23.0" prefHeight="25.0" prefWidth="192.0" promptText="Название" />
-      <Button layoutX="460.0" layoutY="302.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="71.0" text="Изменить" />
+      <Button layoutX="460.0" layoutY="532.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="71.0" text="Изменить" />
       <TreeView fx:id="catalogTree" layoutX="43.0" layoutY="58.0" prefHeight="230.0" prefWidth="460.0" />
+      <TableView fx:id="authorTable" layoutX="39.0" layoutY="315.0" prefHeight="200.0" prefWidth="232.0">
+         <columns>
+            <TableColumn prefWidth="231.0" text="Авторы" />
+         </columns>
+      </TableView>
+      <TableView fx:id="authorArticleTable" layoutX="271.0" layoutY="315.0" prefHeight="200.0" prefWidth="232.0">
+         <columns>
+            <TableColumn prefWidth="231.0" text="Авторы статьи" />
+         </columns>
+      </TableView>
+      <Button layoutX="39.0" layoutY="532.0" mnemonicParsing="false" onAction="#addAuthor" text="Добавить автора" />
+      <Button layoutX="163.0" layoutY="532.0" mnemonicParsing="false" onAction="#removeAuthor" prefHeight="25.0" prefWidth="110.0" text="Удалить автора" />
    </children>
 </AnchorPane>

@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.sql.Date;
+import java.util.Comparator;
 
 public class UsersController extends TabController {
     private TableView tableView;
@@ -36,6 +37,7 @@ public class UsersController extends TabController {
         cards.addAll(mapper.getTeacherCard());
         cards.addAll(mapper.getGraduateStudentCard());
         cards.addAll(mapper.getOtherCard());
+        cards.sort(Comparator.comparing(Card::getId));
         tableView.setItems(cards);
         tableView.refresh();
     }

@@ -49,7 +49,7 @@ public class ArticleController extends TabController {
                 stage,
                 this.stage,
                 545,
-                340);
+                575);
 
         controller.setArticle(article);
         stage.showAndWait();
@@ -60,7 +60,7 @@ public class ArticleController extends TabController {
 
     @Override
     public void add() {
-        Stage stage = modalWindow("windows/menu/employeMenu/article/add/add.fxml", "Добавить статью", 545, 340);
+        Stage stage = modalWindow("windows/menu/employeMenu/article/add/add.fxml", "Добавить статью", 545, 575);
         Object data = stage.getUserData();
         if (data != null && (Integer) data == Window.CLICK_ADD) updateView();
     }
