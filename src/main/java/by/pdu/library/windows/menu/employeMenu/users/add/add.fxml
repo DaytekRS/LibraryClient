@@ -8,22 +8,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="350.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.employeMenu.users.add.AddContoller">
+<AnchorPane prefHeight="350.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.employeMenu.users.add.AddController">
    <children>
-      <TextField layoutX="30.0" layoutY="20.0" promptText="ФИО" />
-      <DatePicker layoutX="230.0" layoutY="20.0" promptText="День рождения" />
-      <DatePicker layoutX="230.0" layoutY="60.0" promptText="Действителен до" />
-      <Button layoutX="360.0" layoutY="311.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Добавить" />
-      <TextField layoutX="30.0" layoutY="60.0" promptText="Логин" />
-      <TextField layoutX="30.0" layoutY="100.0" promptText="Email" />
-      <TabPane layoutX="30.0" layoutY="140.0" prefHeight="160.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
+      <TextField fx:id="nameField" layoutX="30.0" layoutY="20.0" promptText="ФИО" />
+      <DatePicker fx:id="birthdayPicker" layoutX="230.0" layoutY="20.0" promptText="День рождения" />
+      <DatePicker fx:id="validPicker" layoutX="230.0" layoutY="60.0" promptText="Действителен до" />
+      <Button layoutX="360.0" layoutY="311.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="76.0" text="Добавить" />
+      <TextField fx:id="loginField" layoutX="30.0" layoutY="60.0" promptText="Логин" />
+      <TextField fx:id="emailField" layoutX="30.0" layoutY="100.0" promptText="Email" />
+      <TabPane fx:id="choosePane" layoutX="30.0" layoutY="140.0" prefHeight="160.0" prefWidth="377.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Студент">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                      <children>
-                        <ComboBox layoutX="15.0" layoutY="15.0" prefHeight="25.0" prefWidth="210.0" promptText="Группа" />
+                        <ComboBox fx:id="groupBox" layoutX="5.0" layoutY="15.0" prefHeight="25.0" prefWidth="210.0" promptText="Группа" />
                      </children>
                   </AnchorPane>
             </content>
@@ -32,8 +31,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="308.0" style="-fx-background-color: white;">
                      <children>
-                        <ComboBox layoutX="15.0" layoutY="15.0" prefWidth="210.0" promptText="Кафедра" />
-                        <ComboBox layoutX="15.0" layoutY="50.0" prefWidth="210.0" promptText="Степень" />
+                        <ComboBox fx:id="departmentBox" layoutX="5.0" layoutY="15.0" prefWidth="210.0" promptText="Кафедра" />
+                        <ComboBox fx:id="gradeBox" layoutX="5.0" layoutY="50.0" prefWidth="210.0" promptText="Степень" />
                      </children>
                   </AnchorPane>
             </content>
@@ -42,7 +41,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                      <children>
-                        <TextField layoutX="15.0" layoutY="15.0" prefHeight="25.0" prefWidth="210.0" promptText="Тема научной работы" />
+                        <TextField fx:id="scientificField" layoutX="5.0" layoutY="15.0" prefHeight="25.0" prefWidth="210.0" promptText="Тема научной работы" />
                      </children>
                   </AnchorPane>
               </content>
@@ -51,9 +50,9 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="165.0" prefWidth="377.0" style="-fx-background-color: white;">
                      <children>
-                        <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="210.0" promptText="Прописка" />
-                        <TextField layoutX="15.0" layoutY="50.0" prefHeight="25.0" prefWidth="210.0" promptText="Место работы" />
-                        <TextField layoutX="15.0" layoutY="85.0" prefWidth="210.0" promptText="Паспорт" />
+                        <TextField fx:id="registrationField" layoutX="5.0" layoutY="15.0" prefHeight="25.0" prefWidth="210.0" promptText="Прописка" />
+                        <TextField fx:id="workField" layoutX="5.0" layoutY="50.0" prefHeight="25.0" prefWidth="210.0" promptText="Место работы" />
+                        <TextField fx:id="passportField" layoutX="5.0" layoutY="85.0" prefWidth="210.0" promptText="Паспорт" />
                      </children>
                   </AnchorPane>
               </content>

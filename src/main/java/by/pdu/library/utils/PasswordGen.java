@@ -1,4 +1,4 @@
-package net.lacit.laciteka.utilities;
+package by.pdu.library.utils;
 
 import java.util.Random;
 

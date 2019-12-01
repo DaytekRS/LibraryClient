@@ -44,6 +44,41 @@ public class AlertWindow {
             return;
         }
 
+        if (message.contains("ORA-20003")) {
+            AlertWindow.errorAlert("Дата рождения не может быть больше текущего дня.");
+            return;
+        }
+
+        if (message.contains("ORA-20004")) {
+            AlertWindow.errorAlert("Абонемент должен быть действителен.");
+            return;
+        }
+
+        if (message.contains("ORA-20005")) {
+            AlertWindow.errorAlert("Логин должен состоять из: \n" +
+                    "Заглавные латинские буквы: от A до Z\n" +
+                    "Строчные латинские буквы: от a до z\n" +
+                    "Цифры от 0 до 9\n" +
+                    "Недолжен начинаться на цифру\n" +
+                    "Длина от 6 до 26 символов\n" +
+                    "Недолжен состоять из одних цифр");
+            return;
+        }
+
+        if (message.contains("ORA-20006")) {
+            AlertWindow.errorAlert("Пароль должен состоять из: \n" +
+                    "Заглавные латинские буквы: от A до Z\n" +
+                    "Строчные латинские буквы: от a до z\n" +
+                    "Цифры от 0 до 9\n" +
+                    "Длина от 6 до 26 символов\n");
+            return;
+        }
+
+        if (message.contains("ORA-01400")){
+            AlertWindow.errorAlert("Не должно быть пустых полей");
+            return;
+        }
+
         if (message.contains("ORA")) {
             errorAlert("Ошибка Oracle.\nГлупцы бегите быстрее к администратору\nи сообщите код ошибки\n" + message);
         } else {

@@ -78,7 +78,7 @@
         FROM
             ADMIN.CARD c
             INNER JOIN ADMIN.STUDENT s ON s.card_id = c.id
-            LEFT JOIN ADMIN.USERS u ON c.id = u.card_id
+            INNER JOIN ADMIN.USERS u ON c.id = u.card_id
             LEFT JOIN ADMIN.GROUPS g ON g.id = s.group_id
             LEFT JOIN ADMIN.faculty f on g.faculty_id = f.id
         WHERE
@@ -166,5 +166,38 @@
                 (SELECT sysdate FROM DUAL) > u.not_valid
             )AND
             c.removed_date IS NULL
+    </select>
+
+    <insert id="createStudentCard" statementType = "CALLABLE">
+        {call ADMIN.CREATE_STUDENT(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN},
+        #{email, jdbcType =  VARCHAR, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{groupId, jdbcType =  INTEGER, mode = IN})}
+    </insert>
+
+    <insert id="createTeacherCard" statementType = "CALLABLE">
+        {call ADMIN.CREATE_TEACHER(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN},
+        #{email, jdbcType =  VARCHAR, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{departmentId, jdbcType =  INTEGER, mode = IN},#{gradeId, jdbcType =  INTEGER, mode = IN})}
+    </insert>
+
+    <insert id="createGraduateStudent" statementType = "CALLABLE">
+        {call ADMIN.CREATE_GRADUATE_STUDENT(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN},
+        #{email, jdbcType =  VARCHAR, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{scientificTopic, jdbcType =  VARCHAR, mode = IN})}
+    </insert>
+
+    <insert id="createOther" statementType = "CALLABLE">
+        {call ADMIN.CREATE_OTHER_USER(#{login, jdbcType =  VARCHAR, mode = IN},#{password, jdbcType =  VARCHAR, mode = IN},
+        #{email, jdbcType =  VARCHAR, mode = IN},#{fio, jdbcType =  VARCHAR, mode = IN},
+        #{birthday, jdbcType =  VARCHAR, mode = IN}, #{validDate, jdbcType =  VARCHAR, mode = IN},
+        #{registration, jdbcType =  VARCHAR, mode = IN},#{work, jdbcType =  VARCHAR, mode = IN},
+        #{passport, jdbcType =  VARCHAR, mode = IN})}
+    </insert>
+
+    <select id="checkPassword" resultType="java.lang.Integer">
+        SELECT ADMIN.PASSWORD_CHECK(#{password}) FROM DUAL;
     </select>
 </mapper>

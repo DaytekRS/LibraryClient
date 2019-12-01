@@ -101,6 +101,11 @@ public class MenuController extends Window {
         ctxController.getBean("catalog", CatalogController.class).update();
     }
 
+    @FXML
+    private void addUser() {
+        ctxController.getBean("users", UsersController.class).add();
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext ctx) {
         super.setApplicationContext(ctx);

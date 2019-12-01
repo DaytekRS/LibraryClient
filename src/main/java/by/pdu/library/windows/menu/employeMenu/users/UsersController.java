@@ -2,12 +2,14 @@ package by.pdu.library.windows.menu.employeMenu.users;
 
 import by.pdu.library.domain.Card;
 import by.pdu.library.mapper.CardMapper;
+import by.pdu.library.windows.Window;
 import by.pdu.library.windows.menu.employeMenu.TabController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.sql.Date;
 
@@ -42,7 +44,9 @@ public class UsersController extends TabController {
 
     @Override
     public void add() {
-
+        Stage stage = modalWindow("windows/menu/employeMenu/users/add/add.fxml", "Добавить пользователя", 440, 350);
+        Object data = stage.getUserData();
+        if (data != null && (Integer) data == Window.CLICK_ADD) updateView();
     }
 
     @Override
