@@ -111,6 +111,7 @@
                         <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" onAction="#addUser" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
                         <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" onAction="#removeUser" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
                         <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
+                        <Button layoutX="690.0" layoutY="131.0" mnemonicParsing="false" onAction="#getBilet" prefHeight="25.0" prefWidth="99.0" text="Билет" />
                      </children></AnchorPane>
               </content>
             </Tab>

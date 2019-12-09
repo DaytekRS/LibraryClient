@@ -87,6 +87,12 @@
                 (SELECT sysdate FROM DUAL) > u.not_valid
             )AND
             c.removed_date IS NULL
+            <if test = "facultyId!= null">
+                AND f.id = #{ facultyId _name}
+            </if>
+            <if test = "groupId != null">
+                AND g.Id = #{ groupId }
+            </if>
     </select>
 
     <select id="getTeacherCard" resultMap="by.pdu.library.mapper.CardMapper.teacherResultMap">
@@ -118,6 +124,13 @@
                 (SELECT sysdate FROM DUAL) > u.not_valid
             )AND
             c.removed_date IS NULL
+            <if test = "gradeId != null">
+                AND g.id = #{gradeId}
+            </if>
+            <if test = "departmentId != null">
+                AND d.id = #{departmentId}
+            </if>
+
     </select>
 
     <select id="getGraduateStudentCard" resultMap="by.pdu.library.mapper.CardMapper.graduateResultMap">
@@ -234,3 +247,5 @@
         #{passport, jdbcType =  VARCHAR, mode = IN})}
     </insert>
 </mapper>
+
+

@@ -29,6 +29,16 @@ public class AlertWindow {
         return result.get();
     }
 
+    public static void informationAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Information");
+        alert.setTitle("Library");
+        alert.setResizable(false);
+        alert.setContentText(message);
+        ((Stage) alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("img/icon.png"));
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
     public static void errorAlert() {
         errorAlert("Фиг пойми что за ошибка ;)\nТут мои привилегии кончаются\nБегите глупцы :D");
     }

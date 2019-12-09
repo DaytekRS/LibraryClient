@@ -1,5 +1,8 @@
 package by.pdu.library.windows.menu.employeMenu;
 
+import by.pdu.library.Main;
+import by.pdu.library.domain.Card;
+import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.ApplicationContext;
 import by.pdu.library.utils.support.ApplicationContextImpl;
 import by.pdu.library.windows.Window;
@@ -14,6 +17,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.TreeView;
+import javafx.stage.FileChooser;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuController extends Window {
     @FXML
@@ -157,6 +170,42 @@ public class MenuController extends Window {
     private void removeBook() {
         ctxController.getBean("book", BookController.class).remove();
     }
+
+    @FXML
+    private void getBilet() {
+        try {
+            if (userTable.getSelectionModel().getSelectedItem() == null) {
+                AlertWindow.errorAlert("Не выбран элемент");
+                return;
+            }
+            ArrayList<Card> dataBeanList = new ArrayList<>();
+            dataBeanList.add((Card) userTable.getSelectionModel().getSelectedItem());
+            JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
+            Map<String, Object> parameters = new HashMap<>();
+            System.out.println(Main.class.getResource("/report/library.jrxml"));
+            File reportPattern = new File(Main.class.getResource("/report/library.jrxml").getFile());
+            JasperDesign jasperDesign = JRXmlLoader.load(reportPattern);
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+                    parameters, beanColDataSource);
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            File file = fileChooser.showSaveDialog(stage);
+
+            if (file != null) {
+                JasperExportManager.exportReportToPdfFile(jasperPrint, file.getPath());
+                AlertWindow.informationAlert("Файл успешно сохранен");
+            }
+
+        } catch (Exception ex) {
+            AlertWindow.errorAlert(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
 
     @Override
     public void setApplicationContext(ApplicationContext ctx) {
