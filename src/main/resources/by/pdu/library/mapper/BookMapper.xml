@@ -26,6 +26,21 @@
                     resultMap="by.pdu.library.mapper.AuthorMapper.authorResultMap"/>
     </resultMap>
 
+    <resultMap id="instanceResultMap" type="by.pdu.library.domain.Instance">
+        <id column="instance_number" property="numberInstance"/>
+        <result column="edition_id" property="id"/>
+        <result column="edition_year" property="year"/>
+        <result column="edition_image" property="image"/>
+        <result column="edition_name" property="name"/>
+        <result column="edition_price" property="price"/>
+
+        <collection property="language" javaType="by.pdu.library.domain.Language"
+                    resultMap="by.pdu.library.mapper.LanguageMapper.languageResultMap"/>
+
+        <collection property="publishingHouse" javaType="by.pdu.library.domain.PublishingHouse"
+                    resultMap="by.pdu.library.mapper.PublishingHouseMapper.publishingHouseResultMap"/>
+    </resultMap>
+
     <resultMap id="periodicResultMap" type="by.pdu.library.domain.Periodic">
         <id column="edition_id" property="id"/>
         <result column="edition_year" property="year"/>
@@ -112,6 +127,34 @@
             e.REMOVED_DATE IS NULL
     </select>
 
+    <select id="getInstance" resultMap="by.pdu.library.mapper.BookMapper.instanceResultMap">
+        SELECT
+        e.id as "edition_id",
+        e.year as "edition_year",
+        e.image as "edition_image",
+        e.name as "edition_name",
+        e.price as "edition_price",
+        l.id as "language_id",
+        l.name as "language_name",
+        p.id as "publishingHouse_id",
+        p.name as "publishingHouse_name",
+        i.instance_number as "instance_number"
+        FROM
+        ADMIN.EDITION e
+        INNER JOIN ADMIN.INSTANCE i ON e.id = i.edition_id
+        LEFT JOIN ADMIN.LANGUAGE l ON e.LANGUAGE_ID=l.id
+        LEFT JOIN ADMIN.PUBLISHING_HOUSE p ON e.PUBLISHING_HOUSE_ID = p.id
+        WHERE
+        e.REMOVED_DATE IS NULL
+        AND OFF_DATE IS NULL
+        <if test="editionId != null">
+            AND e.id = #{editionId}
+        </if>
+        <if test="roomId != null">
+            AND i.READING_ROOM_ID = #{roomId}
+        </if>
+    </select>
+
     <insert id="insertBook">
          {call ADMIN.CREATE_BOOK(#{id, jdbcType =  INTEGER, mode = IN},#{year, jdbcType =  INTEGER, mode = IN},
          #{image, jdbcType =  VARCHAR, mode = IN},#{name, jdbcType =  VARCHAR, mode = IN},
@@ -166,5 +209,23 @@
             REMOVED_DATE = (SELECT sysdate FROM DUAL)
         WHERE id = #{id}
     </update>
+
+    <insert id="insertInstance">
+        INSERT INTO ADMIN.INSTANCE(EDITION_ID,READING_ROOM_ID,INSTANCE_NUMBER,RECEIPT_DATE)
+        VALUES(#{editionId},#{readingRoomId},#{instanceNumber},(SELECT sysdate from DUAL))
+    </insert>
+
+    <update id="updateInstance">
+        UPDATE ADMIN.INSTANCE
+        SET INSTANCE_NUMBER = #{newNumber}
+        WHERE INSTANCE_NUMBER = #{oldNumber}
+    </update>
+
+    <delete id="removeInstance">
+        DELETE
+        FROM ADMIN.INSTANCE
+        WHERE
+            INSTANCE_NUMBER = #{instanceNumber}
+    </delete>
 
 </mapper>

@@ -1,6 +1,7 @@
 package by.pdu.library.mapper;
 
 import by.pdu.library.domain.Book;
+import by.pdu.library.domain.Instance;
 import by.pdu.library.domain.Periodic;
 import org.apache.ibatis.annotations.Param;
 
@@ -60,6 +61,18 @@ public interface BookMapper {
     void insertArticle(@Param("periodicId") Long periodicId, @Param("articleId") Long articleId);
 
     void removeEdition(Long id);
+
+    void insertInstance(@Param("editionId") Long editionId, @Param("readingRoomId") Long readingRoomId, @Param("instanceNumber") Long instanceNumber);
+
+    List<Instance> getInstance();
+
+    List<Instance> getInstance(@Param("editionId") Long editionId);
+
+    List<Instance> getInstance(@Param("editionId") Long editionId, @Param("roomId") Long roomId);
+
+    void updateInstance(@Param("oldNumber")Long oldNumber,@Param("newNumber") Long newNumber);
+
+    void removeInstance(Long instanceNumber);
 
     Long nextId();
 }

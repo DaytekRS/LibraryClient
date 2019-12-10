@@ -1,13 +1,13 @@
 package by.pdu.library.windows.menu.employeMenu.book;
 
-import by.pdu.library.domain.Book;
-import by.pdu.library.domain.Edition;
-import by.pdu.library.domain.Instance;
+import by.pdu.library.domain.*;
 import by.pdu.library.mapper.BookMapper;
 import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.menu.employeMenu.TabController;
+import by.pdu.library.windows.menu.employeMenu.book.addInstance.AddInstance;
 import by.pdu.library.windows.menu.employeMenu.book.update.UpdateController;
+import by.pdu.library.windows.menu.employeMenu.book.updateInstance.UpdateInstance;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
@@ -33,6 +33,7 @@ public class BookController extends TabController {
     @Override
     public void updateView() {
         BookMapper mapper = ctx.getBean("bookMapper", BookMapper.class);
+        Employe user = ctx.getBean("user",Employe.class);
         ArrayList<Edition> editions = new ArrayList<>(mapper.getBook());
         editions.addAll(mapper.getPeriodic());
         editions.sort(Comparator.comparing(Edition::getId));
@@ -47,10 +48,16 @@ public class BookController extends TabController {
         for (Edition edition : editions) {
             TreeItem<Edition> children = new TreeItem<>(edition);
             root.getChildren().add(children);
+            for (Instance instance: mapper.getInstance(edition.getId(),user.getRoom().getId())){
+                TreeItem<Edition> childrenInstance = new TreeItem<>(instance);
+                children.getChildren().add(childrenInstance);
+            }
         }
 
         view.setRoot(root);
     }
+
+
 
     @Override
     public void update() {
@@ -70,7 +77,7 @@ public class BookController extends TabController {
         Stage stage = new Stage();
 
         UpdateController controller = (UpdateController) loader.loadModal("windows/menu/employeMenu/book/update/update.fxml",
-                "Редактировать статью",
+                "Редактировать книгу",
                 stage,
                 this.stage,
                 860,
@@ -100,6 +107,89 @@ public class BookController extends TabController {
         //if (data != null && (Integer) data == Window.CLICK_ADD) updateView();
     }
 
+    public void addInstance(){
+        TreeItem obj = (TreeItem)view.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.errorAlert("Нет выбранного элемента");
+            return;
+        }
+        Edition edition = (Edition) obj.getValue();
+        System.out.println(obj.getClass());
+        if (edition.getClass().equals(Book.class) || edition.getClass().equals(Periodic.class) ) {
+            LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+            Stage stage = new Stage();
+
+            AddInstance controller = (AddInstance) loader.loadModal("windows/menu/employeMenu/book/addInstance/addInstance.fxml",
+                    "Добавить экземпляр",
+                    stage,
+                    this.stage);
+
+            controller.setEdition(edition);
+            stage.showAndWait();
+            Object data = stage.getUserData();
+            if (data != null) {
+                TreeItem<Edition> childrenInstance = new TreeItem<>((Instance)data);
+                obj.getChildren().add(childrenInstance);
+                view.refresh();
+               // updateView();
+            }
+        }else{
+            AlertWindow.errorAlert("Нет правильно выбранного элемента");
+        }
+    }
+
+    public void updateInstance(){
+        TreeItem obj = (TreeItem)view.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.errorAlert("Нет выбранного элемента");
+            return;
+        }
+        Edition instance = (Edition) obj.getValue();
+        System.out.println(obj.getClass());
+        if (instance.getClass().equals(Instance.class)) {
+            LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+            Stage stage = new Stage();
+
+            UpdateInstance controller = (UpdateInstance) loader.loadModal("windows/menu/employeMenu/book/updateInstance/updateInstance.fxml",
+                    "Редактировать экземпляр",
+                    stage,
+                    this.stage);
+
+            controller.setInstance((Instance) instance);
+            stage.showAndWait();
+            Object data = stage.getUserData();
+            if (data != null) {
+                view.refresh();
+                // updateView();
+            }
+        }else{
+            AlertWindow.errorAlert("Нет правильно выбранного элемента");
+        }
+    }
+
+    @FXML
+    public void  removeInstance() {
+        TreeItem obj = (TreeItem)view.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.errorAlert("Нет выбранного элемента");
+            return;
+        }
+        Edition instance = (Edition) obj.getValue();
+        if (instance.getClass().equals(Instance.class)) {
+            try{
+                BookMapper mapper = ctx.getBean("bookMapper",BookMapper.class);
+                mapper.removeInstance(((Instance) instance).getNumberInstance());
+                obj.getParent().getChildren().remove(obj);
+                view.refresh();
+                commit();
+            }catch (Exception ex){
+                AlertWindow.checkException(ex.getMessage());
+            }
+        }else{
+            AlertWindow.errorAlert("Нет правильно выбранного элемента");
+        }
+    }
+
     @Override
     public void remove() {
         Object obj = view.getSelectionModel().getSelectedItem();
@@ -114,4 +204,6 @@ public class BookController extends TabController {
         root.getChildren().remove(view.getSelectionModel().getSelectedItem());
         view.refresh();
     }
+
+
 }

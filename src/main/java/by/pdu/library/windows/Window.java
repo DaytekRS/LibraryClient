@@ -40,4 +40,15 @@ public abstract class Window {
         stage.showAndWait();
         return stage;
     }
+
+    protected Stage modalWindow(String fxml, String title) {
+        Stage stage = new Stage();
+        LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+        loader.loadModal(fxml,
+                title,
+                stage,
+                this.stage);
+        stage.showAndWait();
+        return stage;
+    }
 }

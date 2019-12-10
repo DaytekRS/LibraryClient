@@ -24,8 +24,20 @@ public class LoadFXML {
         this.ctx = ctx;
     }
 
+    public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner) {
+        return loadModal(fxml, title, primaryStage, owner, false);
+    }
+
     public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height) {
         return loadModal(fxml, title, primaryStage, owner, width, height, false);
+    }
+
+    public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, boolean resizable) {
+        primaryStage.initOwner(owner);
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
+        Window window = load(fxml, title, primaryStage, resizable);
+        primaryStage.centerOnScreen();
+        return window;
     }
 
     public Window loadModal(String fxml, String title, Stage primaryStage, Stage owner, int width, int height, boolean resizable) {
@@ -62,6 +74,27 @@ public class LoadFXML {
 
         primaryStage.setX(newX);
         primaryStage.setY(newY);
+    }
+
+    public Window load(String fxml, String title, Stage primaryStage, boolean resizable) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxml));
+            Parent root = loader.load();
+            Window controller = loader.getController();
+            controller.setApplicationContext(ctx);
+            controller.setStage(primaryStage);
+            primaryStage.setTitle(title);
+            primaryStage.setScene(new Scene(root));
+            primaryStage.getIcons().removeAll();
+            primaryStage.getIcons().add(new Image("img/icon.png"));
+            primaryStage.setResizable(resizable);
+            return controller;
+        } catch (IOException e) {
+            AlertWindow.errorAlert("Произошла непредвиденная ошибка.\nПрограмма будет закрыта");
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return null;
     }
 
     public Window load(String fxml, String title, Stage primaryStage, int width, int height, boolean resizable) {

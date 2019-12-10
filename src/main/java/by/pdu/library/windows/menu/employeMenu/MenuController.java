@@ -162,6 +162,21 @@ public class MenuController extends Window {
     }
 
     @FXML
+    private void addInstanceBook() {
+        ctxController.getBean("book", BookController.class).addInstance();
+    }
+
+    @FXML
+    private void updateInstanceBook() {
+        ctxController.getBean("book", BookController.class).updateInstance();
+    }
+
+    @FXML
+    private void removeInstanceBook() {
+        ctxController.getBean("book", BookController.class).removeInstance();
+    }
+
+    @FXML
     private void updateBook() {
         ctxController.getBean("book", BookController.class).update();
     }
@@ -172,7 +187,7 @@ public class MenuController extends Window {
     }
 
     @FXML
-    private void getBilet() {
+    private void getCard() {
         try {
             if (userTable.getSelectionModel().getSelectedItem() == null) {
                 AlertWindow.errorAlert("Не выбран элемент");

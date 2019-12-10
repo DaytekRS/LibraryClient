@@ -71,8 +71,10 @@ public class AuthorizationController extends Window {
         BookMapper bookMapper = session.getMapper(BookMapper.class);
         ctx.inject(BookMapper.class, "bookMapper", bookMapper);
 
-        System.out.println(bookMapper.getBook());
-        System.out.println(bookMapper.getPeriodic());
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        ctx.inject(UserMapper.class, "userMapper", userMapper);
+
+        System.out.println(bookMapper.getInstance());
     }
 
     @FXML

@@ -5,9 +5,23 @@
 
 <mapper namespace="by.pdu.library.mapper.UserMapper">
     <resultMap id="userResultMap" type="by.pdu.library.domain.User">
+        <result column="card_id" property="cardId"/>
         <result column="user_login" property="login"/>
         <result column="user_password" property="password"/>
         <result column="user_email" property="email"/>
         <result column="user_notValid" property="notValid"/>
     </resultMap>
+
+    <select id="searchUser" resultMap="userResultMap">
+        SELECT
+        card_id as "card_id",
+        login as "user_login",
+        password as "user_password",
+        email as "user_email"
+        FROM
+        USERS
+        WHERE
+        login = #{search} OR
+        email = #{search}
+    </select>
 </mapper>
