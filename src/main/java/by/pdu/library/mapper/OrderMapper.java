@@ -13,4 +13,6 @@ public interface OrderMapper {
     void updateNoAssembledOrder(@Param("id") Long id);
 
     void deleteOrder(@Param("id") Long id);
+
+    void extraditionOrder(@Param("id") Long id);
 }

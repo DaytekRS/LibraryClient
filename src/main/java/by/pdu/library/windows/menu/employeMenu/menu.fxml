@@ -36,7 +36,9 @@
                         <Button layoutX="690.0" layoutY="330.0" mnemonicParsing="false" onAction="#addInstanceBook" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
                         <Button layoutX="690.0" layoutY="410.0" mnemonicParsing="false" onAction="#removeInstanceBook" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
                         <Button layoutX="690.0" layoutY="370.0" mnemonicParsing="false" onAction="#updateInstanceBook" prefHeight="25.0" prefWidth="99.0" text="Редактировать" />
-                        <Label layoutX="710.0" layoutY="301.0" text="Экземпляр" />
+                        <Label layoutX="710.0" layoutY="259.0" text="Экземпляр" />
+                        <Button layoutX="691.0" layoutY="289.0" mnemonicParsing="false" onAction="#takeBook" prefHeight="25.0" prefWidth="99.0" text="Выдать" />
+                        <Button layoutX="691.0" layoutY="131.0" mnemonicParsing="false" onAction="#takeOrder" prefHeight="25.0" prefWidth="99.0" text="Выдать заказ" />
                      </children></AnchorPane>
               </content>
           </Tab>
@@ -140,17 +142,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="759.0">
                      <children>
-                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
-                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
-                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
-                        <TreeTableView layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
+                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" onAction="#returnInstance" prefHeight="25.0" prefWidth="100.0" text="Вернуть" />
+                        <TableView fx:id="extraditionTable" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
                           <columns>
-                            <TreeTableColumn prefWidth="100.0" text="ID выдачи" />
-                            <TreeTableColumn prefWidth="100.0" text="ID карточки" />
-                              <TreeTableColumn prefWidth="250.0" text="Сотрудник" />
-                              <TreeTableColumn prefWidth="220.0" text="Название" />
+                            <TableColumn prefWidth="100.0" text="ID выдачи" />
+                            <TableColumn prefWidth="100.0" text="ID карточки" />
+                            <TableColumn prefWidth="250.0" text="Сотрудник" />
+                            <TableColumn prefWidth="220.0" text="Название" />
                           </columns>
-                        </TreeTableView>
+                        </TableView>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -188,8 +188,9 @@
               </content>
             </Tab>
         </tabs>
+		
       </TabPane>
-      <MenuBar layoutX="-4.0" layoutY="-1.0" prefHeight="28.0" prefWidth="816.0">
+	   <MenuBar layoutX="-4.0" layoutY="-1.0" prefHeight="28.0" prefWidth="816.0">
         <menus>
           <Menu mnemonicParsing="false" text="Файл">
             <items>

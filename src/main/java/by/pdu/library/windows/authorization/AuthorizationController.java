@@ -76,6 +76,9 @@ public class AuthorizationController extends Window {
 
         OrderMapper orderMapper = session.getMapper(OrderMapper.class);
         ctx.inject(OrderMapper.class, "orderMapper", orderMapper);
+
+        ExtraditionMapper extraditionMapper = session.getMapper(ExtraditionMapper.class);
+        ctx.inject(ExtraditionMapper.class, "extraditionMapper", extraditionMapper);
     }
 
     @FXML

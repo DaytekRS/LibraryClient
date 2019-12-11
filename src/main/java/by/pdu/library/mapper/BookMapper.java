@@ -75,4 +75,8 @@ public interface BookMapper {
     void removeInstance(Long instanceNumber);
 
     Long nextId();
+
+    void takeInstance(Long instanceNumber);
+
+    void returnInstance(Long instanceNumber);
 }

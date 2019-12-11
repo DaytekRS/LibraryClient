@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public abstract class Card {
+public class Card {
     protected Long id;
     protected String FIO;
     protected Date birthday;

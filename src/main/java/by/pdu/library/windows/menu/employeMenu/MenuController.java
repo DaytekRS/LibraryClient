@@ -10,6 +10,7 @@ import by.pdu.library.windows.menu.employeMenu.article.ArticleController;
 import by.pdu.library.windows.menu.employeMenu.author.AuthorController;
 import by.pdu.library.windows.menu.employeMenu.book.BookController;
 import by.pdu.library.windows.menu.employeMenu.catalog.CatalogController;
+import by.pdu.library.windows.menu.employeMenu.extradition.ExtraditionController;
 import by.pdu.library.windows.menu.employeMenu.language.LanguageController;
 import by.pdu.library.windows.menu.employeMenu.order.OrderController;
 import by.pdu.library.windows.menu.employeMenu.publishingHouse.PublishingHouseController;
@@ -33,7 +34,7 @@ import java.util.Map;
 
 public class MenuController extends Window {
     @FXML
-    private TableView publishingHouseTable, languageTable, authorTable, userTable, articleTable, orderTable;
+    private TableView extraditionTable, publishingHouseTable, languageTable, authorTable, userTable, articleTable, orderTable;
 
     @FXML
     private TreeTableView bookTree;
@@ -71,6 +72,8 @@ public class MenuController extends Window {
         OrderController order = new OrderController(orderTable);
         ctxController.inject(OrderController.class, "order", order);
 
+        ExtraditionController extradition = new ExtraditionController(extraditionTable);
+        ctxController.inject(ExtraditionController.class, "extradition", extradition);
     }
 
     @FXML
@@ -209,6 +212,12 @@ public class MenuController extends Window {
     }
 
     @FXML
+    private void returnInstance() {
+        ctxController.getBean("extradition", ExtraditionController.class).add();
+        update();
+    }
+
+    @FXML
     private void getCard() {
         try {
             if (userTable.getSelectionModel().getSelectedItem() == null) {
@@ -254,6 +263,18 @@ public class MenuController extends Window {
             tab.setApplicationContext(ctx);
             tab.updateView();
         }
+    }
+
+    @FXML
+    private void takeBook(){
+        ctxController.getBean("book", BookController.class).takeBook();
+        update();
+    }
+
+    @FXML
+    private void takeOrder(){
+        ctxController.getBean("book", BookController.class).takeOrder();
+        update();
     }
 
     @Override

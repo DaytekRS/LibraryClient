@@ -8,7 +8,13 @@ public class Order {
     private Edition edition;
     private Employe employe;
     private String status;
+    private Long cardId;
     {
         status = "Не собран";
+    }
+
+    @Override
+    public String toString() {
+        return id.toString();
     }
 }

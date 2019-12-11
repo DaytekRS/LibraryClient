@@ -17,6 +17,14 @@
                     resultMap="by.pdu.library.mapper.GroupMapper.groupResultMap"/>
     </resultMap>
 
+    <resultMap id="cardResultMap" type="by.pdu.library.domain.TeacherCard">
+        <id column="card_id" property="id"/>
+        <result column="card_fio" property="FIO"/>
+        <result column="card_birthday" property="birthday"/>
+        <result column="card_issueDate" property="issueDate"/>
+        <result column="card_validDate" property="validDate"/>
+    </resultMap>
+
     <resultMap id="teacherResultMap" type="by.pdu.library.domain.TeacherCard">
         <id column="card_id" property="id"/>
         <result column="card_fio" property="FIO"/>

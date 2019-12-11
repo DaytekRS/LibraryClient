@@ -161,6 +161,7 @@
         LEFT JOIN ADMIN.PUBLISHING_HOUSE p ON e.PUBLISHING_HOUSE_ID = p.id
         WHERE
         e.REMOVED_DATE IS NULL
+        AND i.TAKEN = 0
         AND OFF_DATE IS NULL
         <if test="editionId != null">
             AND e.id = #{editionId}
@@ -242,5 +243,19 @@
         WHERE
             INSTANCE_NUMBER = #{instanceNumber}
     </delete>
+
+    <update id="takeInstance">
+        UPDATE ADMIN.INSTANCE
+        SET
+        TAKEN = 1
+        WHERE INSTANCE_NUMBER = #{instanceNumber}
+    </update>
+
+    <update id="returnInstance">
+        UPDATE ADMIN.INSTANCE
+        SET
+        TAKEN = 0
+        WHERE INSTANCE_NUMBER = #{instanceNumber}
+    </update>
 
 </mapper>

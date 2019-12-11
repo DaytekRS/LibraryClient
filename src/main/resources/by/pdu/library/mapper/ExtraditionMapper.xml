@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="by.pdu.library.mapper.ExtraditionMapper">
+
+    <resultMap id="extraditionResultMap" type="by.pdu.library.domain.Extradition">
+        <id column="extradition_id" property="id"/>
+
+        <collection property="card" javaType="by.pdu.library.domain.Card"
+                    resultMap="by.pdu.library.mapper.CardMapper.cardResultMap"/>
+
+        <collection property="employe" javaType="by.pdu.library.domain.Employe"
+                    resultMap="by.pdu.library.mapper.EmployeMapper.employeMapper"/>
+    </resultMap>
+
+    <resultMap id="extraditionInstanceResultMap" type="by.pdu.library.domain.ExtraditionInstance">
+        <id column="extradition_instance_id" property="id"/>
+        <result column="instance_number" property="instanceNumber"/>
+        <collection property="edition" javaType="by.pdu.library.domain.Edition"
+                    resultMap="by.pdu.library.mapper.BookMapper.editionResultMap"/>
+
+        <collection property="card" javaType="by.pdu.library.domain.Card"
+                    resultMap="by.pdu.library.mapper.CardMapper.cardResultMap"/>
+
+        <collection property="employe" javaType="by.pdu.library.domain.Employe"
+                    resultMap="by.pdu.library.mapper.EmployeMapper.employeResultMap"/>
+
+    </resultMap>
+
+    <select id="getExtraditionInstance" resultMap="extraditionInstanceResultMap">
+        SELECT
+        ei.id as "extradition_instance_id",
+
+        e.id as "edition_id",
+        e.year as "edition_year",
+        e.image as "edition_image",
+        e.name as "edition_name",
+        e.price as "edition_price",
+        ep.id AS "employe_id",
+        ep.fio AS "employe_fio",
+        ep.login AS "employe_login",
+        c.id as "card_id",
+        c.FIO as "card_fio",
+        c.birthday as "card_birthday",
+        c.issue_date as "card_issueDate",
+        c.valid_date as "card_validDate",
+        ei.insatnce_number AS "instance_number"
+        FROM
+        admin.extradition_instance ei
+        INNER JOIN ADMIN.instance i ON i.instance_number = ei.insatnce_number
+        INNER JOIN ADMIN.EDITION e ON e.id = i.edition_id
+        INNER JOIN ADMIN.EXTRADITION ex ON ex.id = ei.extradition_id
+        LEFT JOIN ADMIN.EMPLOYE ep ON ep.id = ex.employe_id
+        LEFT JOIN ADMIN.CARD c ON c.id = ex.card_id
+        WHERE ep.reading_room_id = #{roomId}
+        AND ei.return_date IS NULL
+
+    </select>
+
+    <select id="returnInstance">
+        UPDATE admin.extradition_instance
+        SET
+        return_date = (SELECT sysdate FROM DUAL)
+        WHERE id = #{id}
+    </select>
+
+    <select id="getExtradition" resultMap="extraditionResultMap">
+        SELECT
+        x.id AS "extradition_id",
+        ep.id AS "employe_id",
+        ep.fio AS "employe_fio",
+        ep.login AS "employe_login",
+        c.id as "card_id",
+        c.FIO as "card_fio",
+        c.birthday as "card_birthday",
+        c.issue_date as "card_issueDate",
+        c.valid_date as "card_validDate"
+        FROM
+        ADMIN.EXTRADITION x
+        LEFT JOIN ADMIN.EMPLOYE ep ON ep.id = x.employe_id
+        LEFT JOIN ADMIN.CARD c ON c.id = x.card_id
+        WHERE ep.reading_room_id = #{roomId}
+    </select>
+
+    <insert id="insertFaculty" >
+        INSERT INTO
+        ADMIN.FACULTY(name)
+        VALUES (#{name})
+    </insert>
+
+    <update id="updateFaculty">
+        UPDATE ADMIN.FACULTY
+        SET NAME = #{name}
+        WHERE id = #{id}
+    </update>
+
+    <update id="removeFaculty">
+        UPDATE ADMIN.FACULTY
+        SET REMOVED_DATE = (SELECT sysdate FROM DUAL)
+        WHERE id = #{id}
+    </update>
+
+    <insert id="takeInstance">
+        {call ADMIN.INSERT_INSTANCE(
+        #{employeId, jdbcType =  INTEGER, mode = IN},#{date, jdbcType =  VARCHAR, mode = IN},
+        #{cardId, jdbcType =  INTEGER, mode = IN},#{instanceId, jdbcType =  INTEGER, mode = IN})}
+    </insert>
+</mapper>

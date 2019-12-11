@@ -6,6 +6,8 @@ import by.pdu.library.utils.AlertWindow;
 import by.pdu.library.utils.support.LoadFXML;
 import by.pdu.library.windows.menu.employeMenu.TabController;
 import by.pdu.library.windows.menu.employeMenu.book.addInstance.AddInstance;
+import by.pdu.library.windows.menu.employeMenu.book.takeInstance.TakeController;
+import by.pdu.library.windows.menu.employeMenu.book.takeOrder.TakeOrderController;
 import by.pdu.library.windows.menu.employeMenu.book.update.UpdateController;
 import by.pdu.library.windows.menu.employeMenu.book.updateInstance.UpdateInstance;
 import javafx.collections.ObservableList;
@@ -28,6 +30,11 @@ public class BookController extends TabController {
     public BookController(TreeTableView view) {
         super(view);
         this.view = view;
+        ObservableList<TreeTableColumn> columns = view.getColumns();
+        columns.get(0).setCellValueFactory(new TreeItemPropertyValueFactory<Edition, String>("name"));
+        columns.get(1).setCellValueFactory(new TreeItemPropertyValueFactory<Edition, String>("language"));
+        columns.get(2).setCellValueFactory(new TreeItemPropertyValueFactory<Edition, String>("catalog"));
+        columns.get(3).setCellValueFactory(new TreeItemPropertyValueFactory<Instance, Long>("numberInstance"));
     }
 
     @Override
@@ -37,11 +44,7 @@ public class BookController extends TabController {
         ArrayList<Edition> editions = new ArrayList<>(mapper.getBook());
         editions.addAll(mapper.getPeriodic());
         editions.sort(Comparator.comparing(Edition::getId));
-        ObservableList<TreeTableColumn> columns = view.getColumns();
-        columns.get(0).setCellValueFactory(new TreeItemPropertyValueFactory<Edition, String>("name"));
-        columns.get(1).setCellValueFactory(new TreeItemPropertyValueFactory<Edition, String>("language"));
-        columns.get(2).setCellValueFactory(new TreeItemPropertyValueFactory<Edition, String>("catalog"));
-        columns.get(3).setCellValueFactory(new TreeItemPropertyValueFactory<Instance, Long>("numberInstance"));
+
         Book rootEdition = new Book();
         rootEdition.setName("Книги");
         root = new TreeItem<>(rootEdition);
@@ -58,6 +61,52 @@ public class BookController extends TabController {
     }
 
 
+
+    @FXML
+    public void takeBook(){
+        TreeItem obj = (TreeItem)view.getSelectionModel().getSelectedItem();
+        if (obj == null) {
+            AlertWindow.errorAlert("Нет выбранного элемента");
+            return;
+        }
+        Edition instance = (Edition) obj.getValue();
+        if (instance.getClass().equals(Instance.class)) {
+            LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+            Stage stage = new Stage();
+
+            TakeController controller = (TakeController) loader.loadModal("windows/menu/employeMenu/book/takeInstance/take.fxml",
+                    "Выдать экземпляр",
+                    stage,
+                    this.stage);
+
+            controller.setInstance((Instance) instance);
+            stage.showAndWait();
+            Object data = stage.getUserData();
+            if (data != null) {
+                view.refresh();
+                // updateView();
+            }
+        }else{
+            AlertWindow.errorAlert("Нет правильно выбранного элемента");
+        }
+    }
+
+    @FXML
+    public void takeOrder(){
+            LoadFXML loader = ctx.getBean("loader", LoadFXML.class);
+            Stage stage = new Stage();
+
+            TakeOrderController controller = (TakeOrderController) loader.loadModal("windows/menu/employeMenu/book/takeOrder/take.fxml",
+                    "Выдать экземпляр",
+                    stage,
+                    this.stage);
+
+            stage.showAndWait();
+            Object data = stage.getUserData();
+            if (data != null) {
+                updateView();
+            }
+    }
 
     @Override
     public void update() {

@@ -7,7 +7,7 @@
 
     <resultMap id="orderResultMap" type="by.pdu.library.domain.Order">
         <id column="order_id" property="id"/>
-
+        <result column="order_card_id" property="cardId"/>
         <collection property="edition" javaType="by.pdu.library.domain.Edition"
                     resultMap="by.pdu.library.mapper.BookMapper.editionResultMap"/>
 
@@ -30,7 +30,8 @@
         ed.name as "edition_name",
         ed.price as "edition_price",
         l.id as "language_id",
-        l.name as "language_name"
+        l.name as "language_name",
+        o.card_id as "order_card_id"
         FROM ADMIN.ORDERS o
         INNER JOIN ADMIN.READING_ROOM r ON r.id = o.reading_room_id
         INNER JOIN ADMIN.EDITION ed ON ed.id = o.edition_id
@@ -50,6 +51,12 @@
     <update id="updateNoAssembledOrder">
         UPDATE ADMIN.ORDERS
         SET EMPLOYE_ID = NULL
+        WHERE ID = #{id}
+    </update>
+
+    <update id="extraditionOrder">
+        UPDATE ADMIN.ORDERS
+        SET DUE_DATE = (SELECT SYSDATE FROM DUAL)
         WHERE ID = #{id}
     </update>
 
