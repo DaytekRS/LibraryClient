@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,13 +14,13 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="461.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.employeMenu.MenuController">
+<AnchorPane prefHeight="510.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.pdu.library.windows.menu.employeMenu.MenuController">
    <children>
-      <TabPane prefHeight="475.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="26.0" prefHeight="479.0" prefWidth="816.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Книги">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="445.0" prefWidth="760.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="449.0" prefWidth="819.0">
                      <children>
                         <TreeTableView fx:id="bookTree" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
                            <columns>
@@ -119,19 +122,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="759.0">
                      <children>
-                        <TableView layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
+                        <TableView fx:id="orderTable" layoutX="10.0" layoutY="10.0" prefHeight="425.0" prefWidth="670.0">
                            <columns>
-                              <TableColumn prefWidth="55.0" text="ID" />
-                              <TableColumn prefWidth="220.0" text="Название" />
-                              <TableColumn prefWidth="105.0" text="Язык" />
-                              <TableColumn prefWidth="70.0" text="Год" />
-                              <TableColumn prefWidth="106.0" text="ID издания" />
-                              <TableColumn prefWidth="113.0" text="Статус" />
+                              <TableColumn prefWidth="91.0" text="ID" />
+                              <TableColumn prefWidth="298.0" text="Название" />
+                              <TableColumn prefWidth="142.0" text="ID издания" />
+                              <TableColumn prefWidth="138.0" text="Статус" />
                            </columns>
                         </TableView>
-                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Добавить" />
-                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
-                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Редактировать" />
+                        <Button layoutX="690.0" layoutY="10.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="25.0" prefWidth="100.0" text="Собран" />
+                        <Button layoutX="690.0" layoutY="90.0" mnemonicParsing="false" onAction="#removeOrder" prefHeight="25.0" prefWidth="100.0" text="Удалить" />
+                        <Button layoutX="690.0" layoutY="50.0" mnemonicParsing="false" onAction="#updateOrder" prefHeight="25.0" prefWidth="100.0" text="Не собран" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -188,5 +189,14 @@
             </Tab>
         </tabs>
       </TabPane>
+      <MenuBar layoutX="-4.0" layoutY="-1.0" prefHeight="28.0" prefWidth="816.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Файл">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#update" text="Обновить" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

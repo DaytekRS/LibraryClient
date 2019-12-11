@@ -3,7 +3,7 @@ package by.pdu.library.domain;
 import lombok.Data;
 
 @Data
-public abstract class Edition{
+public class Edition{
     public Edition(){
 
     }

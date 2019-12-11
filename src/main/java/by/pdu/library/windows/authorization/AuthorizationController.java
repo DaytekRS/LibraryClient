@@ -74,7 +74,8 @@ public class AuthorizationController extends Window {
         UserMapper userMapper = session.getMapper(UserMapper.class);
         ctx.inject(UserMapper.class, "userMapper", userMapper);
 
-        System.out.println(bookMapper.getInstance());
+        OrderMapper orderMapper = session.getMapper(OrderMapper.class);
+        ctx.inject(OrderMapper.class, "orderMapper", orderMapper);
     }
 
     @FXML
@@ -102,7 +103,7 @@ public class AuthorizationController extends Window {
             if (role == null) {
                 loader.load("windows/menu/adminMenu/adminMenu.fxml", "Меню", stage, 360, 410);
             } else if (role.equals("EMPLOYE_LIBRARY")) {
-                loader.load("windows/menu/employeMenu/menu.fxml", "Меню", stage, 800, 475);
+                loader.load("windows/menu/employeMenu/menu.fxml", "Меню", stage, 805, 510);
             }
 
         } catch (IOException e) {

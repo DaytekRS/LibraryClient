@@ -36,5 +36,6 @@
         <mapper class="by.pdu.library.mapper.CardMapper"/>
         <mapper class="by.pdu.library.mapper.ArticleMapper"/>
         <mapper class="by.pdu.library.mapper.BookMapper"/>
+        <mapper class="by.pdu.library.mapper.OrderMapper"/>
     </mappers>
 </configuration>

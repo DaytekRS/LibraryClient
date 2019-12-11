@@ -11,6 +11,7 @@ import by.pdu.library.windows.menu.employeMenu.author.AuthorController;
 import by.pdu.library.windows.menu.employeMenu.book.BookController;
 import by.pdu.library.windows.menu.employeMenu.catalog.CatalogController;
 import by.pdu.library.windows.menu.employeMenu.language.LanguageController;
+import by.pdu.library.windows.menu.employeMenu.order.OrderController;
 import by.pdu.library.windows.menu.employeMenu.publishingHouse.PublishingHouseController;
 import by.pdu.library.windows.menu.employeMenu.users.UsersController;
 import javafx.fxml.FXML;
@@ -22,6 +23,8 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ import java.util.Map;
 
 public class MenuController extends Window {
     @FXML
-    private TableView publishingHouseTable, languageTable, authorTable, userTable, articleTable;
+    private TableView publishingHouseTable, languageTable, authorTable, userTable, articleTable, orderTable;
 
     @FXML
     private TreeTableView bookTree;
@@ -64,6 +67,10 @@ public class MenuController extends Window {
 
         BookController book = new BookController(bookTree);
         ctxController.inject(BookController.class, "book", book);
+
+        OrderController order = new OrderController(orderTable);
+        ctxController.inject(OrderController.class, "order", order);
+
     }
 
     @FXML
@@ -187,6 +194,21 @@ public class MenuController extends Window {
     }
 
     @FXML
+    private void addOrder() {
+        ctxController.getBean("order", OrderController.class).add();
+    }
+
+    @FXML
+    private void updateOrder() {
+        ctxController.getBean("order", OrderController.class).update();
+    }
+
+    @FXML
+    private void removeOrder() {
+        ctxController.getBean("order", OrderController.class).remove();
+    }
+
+    @FXML
     private void getCard() {
         try {
             if (userTable.getSelectionModel().getSelectedItem() == null) {
@@ -222,12 +244,21 @@ public class MenuController extends Window {
     }
 
 
-    @Override
-    public void setApplicationContext(ApplicationContext ctx) {
-        super.setApplicationContext(ctx);
+
+    @FXML
+    private void update(){
+        System.out.println("work");
+        SqlSession session = ctx.getBean("session",SqlSession.class);
+        session.commit();
         for (TabController tab : ctxController.getBeans(TabController.class)) {
             tab.setApplicationContext(ctx);
             tab.updateView();
         }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext ctx) {
+        super.setApplicationContext(ctx);
+        update();
     }
 }
